@@ -8,8 +8,14 @@ export default class Home extends Component {
     return (
       <div>
         <div className={styles.container}>
-          <h2>Home</h2>
-          <Link to="/counter">to Counter</Link>
+          <h2>Welcome to addons.js!</h2>
+          <p>
+            It looks like this is the first time you're using addons.js!
+          </p>
+          <br />
+          <button>
+            <Link to="/counter">Click to setup</Link>
+          </button>
         </div>
       </div>
     );

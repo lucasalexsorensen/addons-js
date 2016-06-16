@@ -17,9 +17,10 @@ app.on('window-all-closed', () => {
 
 app.on('ready', () => {
   mainWindow = new BrowserWindow({
-    show: false,
+    show: true,
     width: 1024,
-    height: 728
+    height: 728,
+    frame: false
   });
 
   mainWindow.loadURL(`file://${__dirname}/app/app.html`);
@@ -34,7 +35,7 @@ app.on('ready', () => {
   });
 
   if (process.env.NODE_ENV === 'development') {
-    mainWindow.openDevTools();
+    //mainWindow.openDevTools();
   }
 
   if (process.platform === 'darwin') {
