@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { updateFilter } from '../actions/filterGames';
 
 import GameEntry from '../components/GameEntry';
 
@@ -12,9 +14,11 @@ class MyGames extends Component {
 
   createGameEntries() {
     return this.props.games.map((game) => {
-      return (
-        <GameEntry id={game.id} name={game.name} imageUrl={game.imageUrl} />
-      )
+      if (game.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1){
+        return (
+          <GameEntry id={game.id} name={game.name} imageUrl={game.imageUrl} />
+        )
+      }
     });
   }
 
@@ -24,9 +28,11 @@ class MyGames extends Component {
     });
   }
 
-  render() {
-    var games = this.getSearchOptions();
+  handleUpdateInput(text) {
+    this.props.updateFilter(text);
+  }
 
+  render() {
     var styles = {
       container: {
         width: '90%',
@@ -49,11 +55,16 @@ class MyGames extends Component {
       }
     };
 
+    let searchOptions = this.getSearchOptions();
+
     return (
       <div style={styles.container}>
         <h4 style={styles.heading}>My Games</h4>
         <AutoComplete
-          dataSource={games}
+          onUpdateInput={this.handleUpdateInput.bind(this)}
+          onNewRequest={this.handleUpdateInput.bind(this)}
+          searchText={this.props.filterText}
+          dataSource={searchOptions}
           hintText="Search games"
           openOnFocus={false}
           underlineShow={false}
@@ -72,8 +83,13 @@ function mapStateToProps(state) {
   const { games } = state.gamesList;
 
   return {
-    games: games
+    games: games,
+    filterText: state.filterGamesText
   };
 }
 
-export default connect(mapStateToProps)(MyGames);
+function matchDispatchToProps(dispatch) {
+  return bindActionCreators({updateFilter: updateFilter}, dispatch)
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(MyGames);
