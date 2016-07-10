@@ -16,7 +16,7 @@ class MyGames extends Component {
     return this.props.games.map((game) => {
       if (game.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1){
         return (
-          <GameEntry id={game.id} name={game.name} imageUrl={game.imageUrl} />
+          <GameEntry id={game.id} name={game.name} version={game.version} imageUrl={game.imageUrl} />
         )
       }
     });
@@ -51,7 +51,7 @@ class MyGames extends Component {
         display: 'inline-flex',
         webkitFlexFlow: 'row wrap',
         justifyContent: 'flex-start',
-        alignContent: 'center'
+        alignContent: 'flex-start'
       }
     };
 
