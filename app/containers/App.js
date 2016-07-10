@@ -1,14 +1,24 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class App extends Component {
-  static propTypes = {
-    children: PropTypes.element.isRequired
-  };
+import Header from '../components/Header';
+import LeftNav from '../components/LeftNav';
 
+export default class App extends Component {
   render() {
     return (
-      <div>
-        {this.props.children}
+      <div className="app">
+        <header>
+          <Header />
+        </header>
+
+
+        <aside className="primary-aside">
+          <LeftNav />
+        </aside>
+
+        <main>
+          {this.props.children}
+        </main>
       </div>
     );
   }
