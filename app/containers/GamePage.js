@@ -2,29 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import AddonInstalledRow from '../components/AddonInstalledRow';
-
-import { Tabs, Tab, Badge, Table, TableRow, TableRowColumn, TableBody, TableHeader, TableHeaderColumn } from 'material-ui';
+import { Tabs, Tab, Avatar, Badge, Table, TableRow, TableRowColumn, TableBody, TableHeader, TableHeaderColumn } from 'material-ui';
 import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import DeviceStorage from 'material-ui/svg-icons/device/storage';
 import FileCloudDownload from 'material-ui/svg-icons/file/cloud-download';
 
 class GamePage extends Component {
-  renderAddonRows() {
-    return this.props.game.installedAddons.map((addon) => {
-      return (
-        <AddonInstalledRow
-          id={addon.id}
-          iconUrl={addon.iconUrl}
-          name={addon.name}
-          status={addon.status}
-          latestVersion={addon.latestVersion}
-          downloads={addon.downloads}
-        />
-      )
-    });
-  }
-
   render() {
     var styles = {
       container: {
@@ -38,6 +21,11 @@ class GamePage extends Component {
         marginTop: 20,
         marginLeft: 20,
         cursor: 'pointer'
+      },
+
+      gameAvatar: {
+        backgroundColor: 'white'
+
       },
 
       heading: {
@@ -54,7 +42,10 @@ class GamePage extends Component {
         <Link to="/myGames">
           <NavigationArrowBack style={styles.backArrow} />
         </Link>
-        <h4 style={styles.heading}>{this.props.game.name}</h4>
+        <h4 style={styles.heading}>
+          <Avatar size={35} style={styles.gameAvatar} src={'assets/img/' + this.props.game.imageUrl} />
+          {this.props.game.name}
+        </h4>
         <Tabs tabItemContainerStyle={styles.tabContainer}>
           <Tab label={<span>My Addons</span>} icon={<DeviceStorage />}>
             <Table multiSelectable={true} fixedHeader={true}>
@@ -66,11 +57,22 @@ class GamePage extends Component {
                   <TableHeaderColumn>Downloads</TableHeaderColumn>
                 </TableRow>
               </TableHeader>
-              <TableBody showRowHover={true} stripeRow={true}>
-                {this.renderAddonRows()}
+              <TableBody showRowHover={true}>
+                {this.props.game.installedAddons.map((addon) => {
+                  return (
+                    <TableRow /*key={addon.id}*/>
+                      <TableRowColumn>{addon.name}</TableRowColumn>
+                      <TableRowColumn>{addon.status}</TableRowColumn>
+                      <TableRowColumn>{addon.latestVersion}</TableRowColumn>
+                      <TableRowColumn>{addon.downloads}</TableRowColumn>
+                    </TableRow>
+                  );
+                })}
               </TableBody>
             </Table>
           </Tab>
+
+
           <Tab label={<span>Get Addons</span>} icon={<FileCloudDownload />}>
 
           </Tab>

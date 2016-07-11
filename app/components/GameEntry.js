@@ -34,6 +34,7 @@ export default class GameEntry extends Component {
         minHeight: 180,
         width: '75%',
         paddingTop: '4%',
+        paddingBottom: '4.5%',
         marginRight: 'auto',
         marginLeft: 'auto',
         display: 'block',
@@ -42,13 +43,16 @@ export default class GameEntry extends Component {
       },
 
       gameTitle: {
+        fontWeight: 'bold',
         textAlign: 'center',
-        fontSize: 18
+        fontSize: 17
       },
 
       gameVersion: {
-        textAlign: 'left',
-        verticalAlign: 'bottom'
+        fontSize: 15,
+        textAlign: 'center',
+        verticalAlign: 'bottom',
+        marginBottom: 10
       }
     };
 
@@ -56,7 +60,7 @@ export default class GameEntry extends Component {
       <li style={styles.container}>
         <Link to={'myGames/' + this.props.id}>
           <Paper style={styles.paper}>
-            <img src={'../assets/img/' + this.props.imageUrl} style={styles.gameImage}></img>
+            <img src={'assets/img/' + this.props.imageUrl} style={styles.gameImage}></img>
             <h5 style={styles.gameTitle}>{this.props.name}</h5>
             <h6 style={styles.gameVersion}>{this.props.version}</h6>
           </Paper>
