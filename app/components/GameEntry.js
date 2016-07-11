@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-
 import { Link } from 'react-router';
 
 import { Paper } from 'material-ui';
@@ -57,7 +56,7 @@ export default class GameEntry extends Component {
       <li style={styles.container}>
         <Link to={'myGames/' + this.props.id}>
           <Paper style={styles.paper}>
-            <img src={this.props.imageUrl} style={styles.gameImage}></img>
+            <img src={'../assets/img/' + this.props.imageUrl} style={styles.gameImage}></img>
             <h5 style={styles.gameTitle}>{this.props.name}</h5>
             <h6 style={styles.gameVersion}>{this.props.version}</h6>
           </Paper>

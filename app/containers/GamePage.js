@@ -2,12 +2,29 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import { Tabs, Tab, Badge } from 'material-ui';
+import AddonInstalledRow from '../components/AddonInstalledRow';
+
+import { Tabs, Tab, Badge, Table, TableRow, TableRowColumn, TableBody, TableHeader, TableHeaderColumn } from 'material-ui';
 import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import DeviceStorage from 'material-ui/svg-icons/device/storage';
 import FileCloudDownload from 'material-ui/svg-icons/file/cloud-download';
 
 class GamePage extends Component {
+  renderAddonRows() {
+    return this.props.game.installedAddons.map((addon) => {
+      return (
+        <AddonInstalledRow
+          id={addon.id}
+          iconUrl={addon.iconUrl}
+          name={addon.name}
+          status={addon.status}
+          latestVersion={addon.latestVersion}
+          downloads={addon.downloads}
+        />
+      )
+    });
+  }
+
   render() {
     var styles = {
       container: {
@@ -40,7 +57,19 @@ class GamePage extends Component {
         <h4 style={styles.heading}>{this.props.game.name}</h4>
         <Tabs tabItemContainerStyle={styles.tabContainer}>
           <Tab label={<span>My Addons</span>} icon={<DeviceStorage />}>
-
+            <Table multiSelectable={true} fixedHeader={true}>
+              <TableHeader adjustForCheckBox={true}>
+                <TableRow>
+                  <TableHeaderColumn>Name</TableHeaderColumn>
+                  <TableHeaderColumn>Status</TableHeaderColumn>
+                  <TableHeaderColumn>Latest Version</TableHeaderColumn>
+                  <TableHeaderColumn>Downloads</TableHeaderColumn>
+                </TableRow>
+              </TableHeader>
+              <TableBody showRowHover={true} stripeRow={true}>
+                {this.renderAddonRows()}
+              </TableBody>
+            </Table>
           </Tab>
           <Tab label={<span>Get Addons</span>} icon={<FileCloudDownload />}>
 
