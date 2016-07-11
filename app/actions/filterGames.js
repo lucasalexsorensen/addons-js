@@ -1,7 +1,7 @@
-export const UPDATE_FILTER = 'UPDATE_FILTER';
-export function updateFilter(filterText){
+export const UPDATE_MYGAMES_FILTER = 'UPDATE_MYGAMES_FILTER';
+export function updateFilter(filterText) {
   return {
-    type: UPDATE_FILTER,
+    type: UPDATE_MYGAMES_FILTER,
     filterText
   }
 }

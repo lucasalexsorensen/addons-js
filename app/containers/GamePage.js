@@ -1,13 +1,30 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import { Tabs, Tab, Avatar, Badge, Table, TableRow, TableRowColumn, TableBody, TableHeader, TableHeaderColumn } from 'material-ui';
+import { updateFilter } from '../actions/filterInstalledAddons';
+
+import { Tabs, Tab, Avatar, Badge, AutoComplete, Table, TableRow, TableRowColumn, TableBody, TableHeader, TableHeaderColumn } from 'material-ui';
 import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import DeviceStorage from 'material-ui/svg-icons/device/storage';
 import FileCloudDownload from 'material-ui/svg-icons/file/cloud-download';
 
 class GamePage extends Component {
+  getSearchOptions() {
+    return this.props.game.installedAddons.map((addon) => {
+      return (addon.name)
+    })
+  }
+
+  filterSearchOptions(searchText, key) {
+    return key.toLowerCase().indexOf(searchText.toLowerCase()) !== -1
+  }
+
+  handleUpdateInput(text){
+    this.props.updateFilter(text);
+  }
+
   render() {
     var styles = {
       container: {
@@ -20,7 +37,8 @@ class GamePage extends Component {
         position: 'fixed',
         marginTop: 20,
         marginLeft: 20,
-        cursor: 'pointer'
+        cursor: 'pointer',
+        zIndex: 999
       },
 
       gameAvatar: {
@@ -32,10 +50,17 @@ class GamePage extends Component {
         textAlign: 'center'
       },
 
+      searchField: {
+        marginLeft: 25,
+        width: '50%'
+      },
+
       tabContainer: {
         height: 70
       }
     };
+
+    let searchOptions = this.getSearchOptions();
 
     return(
       <div style={styles.container}>
@@ -48,6 +73,16 @@ class GamePage extends Component {
         </h4>
         <Tabs tabItemContainerStyle={styles.tabContainer}>
           <Tab label={<span>My Addons</span>} icon={<DeviceStorage />}>
+            <AutoComplete
+              onNewRequest={this.handleUpdateInput.bind(this)}
+              onUpdateInput={this.handleUpdateInput.bind(this)}
+              searchText={this.props.filterText}
+              hintText="Search names"
+              dataSource={searchOptions}
+              underlineShow={false}
+              filter={this.filterSearchOptions}
+              style={styles.searchField}
+            />
             <Table multiSelectable={true} fixedHeader={true}>
               <TableHeader adjustForCheckBox={true}>
                 <TableRow>
@@ -59,14 +94,16 @@ class GamePage extends Component {
               </TableHeader>
               <TableBody showRowHover={true}>
                 {this.props.game.installedAddons.map((addon) => {
-                  return (
-                    <TableRow /*key={addon.id}*/>
-                      <TableRowColumn>{addon.name}</TableRowColumn>
-                      <TableRowColumn>{addon.status}</TableRowColumn>
-                      <TableRowColumn>{addon.latestVersion}</TableRowColumn>
-                      <TableRowColumn>{addon.downloads}</TableRowColumn>
-                    </TableRow>
-                  );
+                  if (addon.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1){
+                    return (
+                      <TableRow /*key={addon.id}*/>
+                        <TableRowColumn>{addon.name}</TableRowColumn>
+                        <TableRowColumn>{addon.status}</TableRowColumn>
+                        <TableRowColumn>{addon.latestVersion}</TableRowColumn>
+                        <TableRowColumn>{addon.downloads} <DeviceStorage /></TableRowColumn>
+                      </TableRow>
+                    );
+                  }
                 })}
               </TableBody>
             </Table>
@@ -95,8 +132,13 @@ function mapStateToProps(state, routerProps) {
   }
 
   return {
-    game: currGame
+    game: currGame,
+    filterText: state.filterInstalledAddons
   };
 }
 
-export default connect(mapStateToProps)(GamePage);
+function matchDispatchToProps(dispatch){
+  return bindActionCreators({updateFilter: updateFilter}, dispatch)
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(GamePage);
