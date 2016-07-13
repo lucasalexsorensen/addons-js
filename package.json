@@ -1,8 +1,7 @@
 {
-  "name": "electron-react-boilerplate",
-  "productName": "ElectronReact",
-  "version": "0.10.0",
-  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "name": "addons.js",
+  "version": "0.0.1",
+  "description": "A custom and open-source client for World of Warcraft AddOn management similar to the Curse Client.",
   "main": "main.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha --compilers js:babel-register --recursive --require ./test/setup.js test/**/*.spec.js",
@@ -25,27 +24,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chentsulin/electron-react-boilerplate.git"
+    "url": "git+https://github.com/lucasalexsorensen/addons.js.git"
   },
   "author": {
-    "name": "C. T. Lin",
-    "email": "chentsulin@gmail.com",
-    "url": "https://github.com/chentsulin"
+    "name": "Lucas A. Sorensen",
+    "email": "lucas.alex.sorensen@gmail.com",
+    "url": "https://github.com/lucasalexsorensen"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chentsulin/electron-react-boilerplate/issues"
+    "url": "https://github.com/lucasalexsorensen/addons-js/issues"
   },
-  "keywords": [
-    "electron",
-    "boilerplate",
-    "react",
-    "react-router",
-    "flux",
-    "webpack",
-    "react-hot"
-  ],
-  "homepage": "https://github.com/chentsulin/electron-react-boilerplate#readme",
+  "homepage": "https://github.com/lucasalexsorensen/addons-js#readme",
   "devDependencies": {
     "asar": "^0.11.0",
     "babel-core": "^6.9.0",
@@ -64,7 +54,6 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
     "chai": "^3.5.0",
-    "chromedriver": "^2.21.2",
     "co-mocha": "^1.1.2",
     "concurrently": "^2.1.0",
     "cross-env": "^1.0.8",
@@ -91,8 +80,8 @@
     "node-libs-browser": "^1.0.0",
     "react-addons-test-utils": "^15.1.0",
     "redux-logger": "^2.6.1",
-    "selenium-webdriver": "^2.53.2",
     "sinon": "^1.17.4",
+    "spectron": "^3.2.4",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
     "webpack-dev-middleware": "^1.6.1",
@@ -102,12 +91,17 @@
     "css-modules-require-hook": "^4.0.0",
     "electron-debug": "^1.0.1",
     "font-awesome": "^4.6.3",
+    "hammerjs": "^2.0.8",
+    "jquery": "^3.1.0",
+    "material-ui": "^0.15.2",
+    "materialize-css": "^0.97.6",
     "postcss": "^5.0.21",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.4.1",
     "react-router-redux": "^4.0.4",
+    "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
     "source-map-support": "^0.4.0"
