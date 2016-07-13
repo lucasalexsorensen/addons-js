@@ -25,7 +25,7 @@ export default class Header extends Component {
         <AppBar title="addons.js"
                 style={styles.header}
                 touch={true}
-                iconElementLeft={<div></div>}
+                showMenuIconButton={false}
                 iconElementRight={<OsButtons />}>
         </AppBar>
       </div>

@@ -9,6 +9,7 @@ import { IndexRoute, Route, Router, hashHistory } from 'react-router';
 const store = configureStore();
 const history = syncHistoryWithStore(hashHistory, store);
 
+
 var injectTapEventPlugin = require('react-tap-event-plugin');
 
 injectTapEventPlugin();

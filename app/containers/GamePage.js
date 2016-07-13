@@ -5,10 +5,11 @@ import { bindActionCreators } from 'redux';
 
 import { updateFilter } from '../actions/filterInstalledAddons';
 
-import { Tabs, Tab, Avatar, Badge, AutoComplete, Table, TableRow, TableRowColumn, TableBody, TableHeader, TableHeaderColumn } from 'material-ui';
+import { Tabs, Tab, Avatar, Badge, IconButton, AutoComplete, Table, TableRow, TableRowColumn, TableBody, TableHeader, TableHeaderColumn } from 'material-ui';
 import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import DeviceStorage from 'material-ui/svg-icons/device/storage';
 import FileCloudDownload from 'material-ui/svg-icons/file/cloud-download';
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 class GamePage extends Component {
   getSearchOptions() {
@@ -57,10 +58,19 @@ class GamePage extends Component {
 
       tabContainer: {
         height: 70
+      },
+
+      removeButton: {
+        borderRadius: 2,
+        backgroundColor: '#ef5350',
+        float: 'right',
+        zIndex: 999
+      },
+
+      removeIcon: {
+        color: 'white'
       }
     };
-
-    let searchOptions = this.getSearchOptions();
 
     return(
       <div style={styles.container}>
@@ -78,7 +88,7 @@ class GamePage extends Component {
               onUpdateInput={this.handleUpdateInput.bind(this)}
               searchText={this.props.filterText}
               hintText="Search names"
-              dataSource={searchOptions}
+              dataSource={this.getSearchOptions()}
               underlineShow={false}
               filter={this.filterSearchOptions}
               style={styles.searchField}
@@ -100,7 +110,12 @@ class GamePage extends Component {
                         <TableRowColumn>{addon.name}</TableRowColumn>
                         <TableRowColumn>{addon.status}</TableRowColumn>
                         <TableRowColumn>{addon.latestVersion}</TableRowColumn>
-                        <TableRowColumn>{addon.downloads} <DeviceStorage /></TableRowColumn>
+                        <TableRowColumn>
+                          {addon.downloads}
+                          <IconButton style={styles.removeButton} iconStyle={styles.removeIcon}>
+                            <NavigationClose color='white' />
+                          </IconButton>
+                        </TableRowColumn>
                       </TableRow>
                     );
                   }
@@ -111,7 +126,7 @@ class GamePage extends Component {
 
 
           <Tab label={<span>Get Addons</span>} icon={<FileCloudDownload />}>
-
+            <h5>Fetching addons...</h5>
           </Tab>
         </Tabs>
       </div>

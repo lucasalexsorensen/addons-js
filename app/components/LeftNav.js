@@ -32,12 +32,12 @@ export default class LeftNav extends Component {
           </Link>
           <Divider />
 
-          <Link to="/myGames" activeClassName="activeLink">
+          <Link to="myGames" activeClassName="activeLink">
             <MenuItem leftIcon={<HardwareVideogameAsset />}>My Games</MenuItem>
           </Link>
           <Divider />
 
-          <Link to="/settings" activeClassName="activeLink">
+          <Link to="settings" activeClassName="activeLink">
             <MenuItem leftIcon={<ActionSettingsApplications />}>Settings</MenuItem>
           </Link>
           <Divider />

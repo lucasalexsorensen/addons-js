@@ -2,8 +2,9 @@ import React, { Component, PropTypes } from 'react';
 
 import Header from '../components/Header';
 import LeftNav from '../components/LeftNav';
+import ConfigureDialog from '../containers/ConfigureDialog';
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return (
       <div className="app">
@@ -17,9 +18,12 @@ export default class App extends Component {
         </aside>
 
         <main>
+          <ConfigureDialog />
           {this.props.children}
         </main>
       </div>
     );
   }
 }
+
+export default App;

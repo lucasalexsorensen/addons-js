@@ -4,8 +4,12 @@ import counter from './counter';
 import gamesList from './gamesList'
 import filterGamesText from './filterGamesText' ;
 import filterInstalledAddons from './filterInstalledAddons';
+import homeStepperState from './homeStepper';
+import toggleConfigureDialog from './toggleConfigureDialog';
 
 const rootReducer = combineReducers({
+  toggleConfigureDialog,
+  homeStepperState,
   gamesList,
   filterGamesText,
   filterInstalledAddons,
