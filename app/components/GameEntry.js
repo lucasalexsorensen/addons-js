@@ -4,17 +4,10 @@ import { Link } from 'react-router';
 import { Paper } from 'material-ui';
 
 export default class GameEntry extends Component {
-  static propTypes = {
-    id: PropTypes.element.isRequired,
-    name: PropTypes.element.isRequired,
-    imageUrl: PropTypes.element.isRequired,
-    version: PropTypes.element.isRequired
-  };
-
   render() {
     var styles = {
       container: {
-        flexBasis: '220',
+        flexBasis: 220,
         cursor: 'pointer',
         margin: 10
       },

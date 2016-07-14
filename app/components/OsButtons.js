@@ -16,7 +16,7 @@ export default class OsButtons extends Component {
 
       icon: {
         color: 'white',
-        webkitAppRegion: 'no-drag'
+        WebkitAppRegion: 'no-drag'
       }
     };
 

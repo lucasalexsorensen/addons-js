@@ -1,4 +1,4 @@
-import { UPDATE_MYGAMES_FILTER} from '../actions/filterGames';
+import { UPDATE_MYGAMES_FILTER } from '../actions/filterGames';
 
 let initialState = '';
 

@@ -3,10 +3,12 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 
+
 import { syncHistoryWithStore } from 'react-router-redux';
 import { IndexRoute, Route, Router, hashHistory } from 'react-router';
 
 const store = configureStore();
+
 const history = syncHistoryWithStore(hashHistory, store);
 
 

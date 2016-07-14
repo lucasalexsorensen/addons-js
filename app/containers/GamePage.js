@@ -135,10 +135,8 @@ class GamePage extends Component {
 }
 
 function mapStateToProps(state, routerProps) {
-  const { games } = state.gamesList;
-
   let currGame = null;
-  for (let game of games){
+  for (let game of state.gamesList){
 
     if (game.id == routerProps.params.gameId){
       currGame = game;

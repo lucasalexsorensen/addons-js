@@ -16,7 +16,7 @@ class MyGames extends Component {
     return this.props.games.map((game) => {
       if (game.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1){
         return (
-          <GameEntry id={game.id} name={game.name} version={game.version} imageUrl={game.imageUrl} />
+          <GameEntry key={game.id} id={game.id} name={game.name} version={game.version} imageUrl={game.imageUrl} />
         )
       }
     });
@@ -49,7 +49,7 @@ class MyGames extends Component {
         listStyle: 'none',
         marginTop: '3%',
         display: 'inline-flex',
-        webkitFlexFlow: 'row wrap',
+        WebkitFlexFlow: 'row wrap',
         justifyContent: 'flex-start',
         alignContent: 'flex-start'
       }
@@ -80,10 +80,9 @@ class MyGames extends Component {
 }
 
 function mapStateToProps(state) {
-  const { games } = state.gamesList;
 
   return {
-    games: games,
+    games: state.gamesList,
     filterText: state.filterGamesText
   };
 }

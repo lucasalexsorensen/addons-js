@@ -16,7 +16,7 @@ export default class Header extends Component {
         boxShadow: 'none',
         height: '10%',
         maxHeight: 100,
-        webkitAppRegion: 'drag'
+        WebkitAppRegion: 'drag'
       }
     };
 
