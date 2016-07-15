@@ -1,24 +1,24 @@
 import { expect } from 'chai';
-import counter from '../../app/reducers/counter';
-import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../../app/actions/counter';
+import configStepperState from '../../app/reducers/configStepperState';
+import { INCREMENT_CONFIG_STEPPER_STATE, DECREMENT_CONFIG_STEPPER_STATE } from '../../app/actions/configureStepperState';
 
 
 describe('reducers', () => {
-  describe('counter', () => {
+  describe('configStepperState', () => {
     it('should handle initial state', () => {
-      expect(counter(undefined, {})).to.equal(0);
+      expect(configStepperState(undefined, {})).to.equal(0);
     });
 
-    it('should handle INCREMENT_COUNTER', () => {
-      expect(counter(1, { type: INCREMENT_COUNTER })).to.equal(2);
+    it('should handle INCREMENT_CONFIG_STEPPER_STATE', () => {
+      expect(configStepperState(1, { type: INCREMENT_CONFIG_STEPPER_STATE })).to.equal(2);
     });
 
-    it('should handle DECREMENT_COUNTER', () => {
-      expect(counter(1, { type: DECREMENT_COUNTER })).to.equal(0);
+    it('should handle DECREMENT_CONFIG_STEPPER_STATE', () => {
+      expect(configStepperState(1, { type: DECREMENT_CONFIG_STEPPER_STATE })).to.equal(0);
     });
 
     it('should handle unknown action type', () => {
-      expect(counter(1, { type: 'unknown' })).to.equal(1);
+      expect(configStepperState(1, { type: 'unknown' })).to.equal(1);
     });
   });
 });

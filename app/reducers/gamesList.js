@@ -1,4 +1,4 @@
-import { ADD_GAME_TO_LIST } from '../actions/gamesList';
+import { ADD_GAME_TO_LIST, REMOVE_GAME_FROM_LIST } from '../actions/gamesList';
 
 const games = [
   {
@@ -40,13 +40,18 @@ const games = [
   }
 ];
 
-const initialState= games;
+const initialState = games;
 
-export default function gamesList(state = initialState, action) {
-  switch (action){
+let gamesList = (state = initialState, action) => {
+  switch (action.type){
     case ADD_GAME_TO_LIST:
-          return state.push(action.game);
+          return [...state, action.game];
+    case REMOVE_GAME_FROM_LIST:
+          console.log("hello");
+          return state;
     default:
           return state;
   }
 }
+
+export default gamesList;
