@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import configStepperState from '../../app/reducers/configStepperState';
-import { INCREMENT_CONFIG_STEPPER_STATE, DECREMENT_CONFIG_STEPPER_STATE } from '../../app/actions/configureStepperState';
+import { INCREMENT_CONFIG_STEPPER_STATE, DECREMENT_CONFIG_STEPPER_STATE } from '../../app/actions/configStepperState';
 
 
 describe('reducers', () => {

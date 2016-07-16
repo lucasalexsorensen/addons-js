@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import { connect } from 'react-redux';
+
 import Header from '../components/Header';
 import LeftNav from '../components/LeftNav';
 import ConfigureDialog from '../containers/ConfigureDialog';
@@ -14,7 +16,7 @@ class App extends Component {
 
 
         <aside className="primary-aside">
-          <LeftNav />
+          <LeftNav numInstallations={this.props.numInstallations} />
         </aside>
 
         <main>
@@ -26,4 +28,10 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state){
+  return {
+    numInstallations: state.gamesList.length
+  }
+}
+
+export default connect(mapStateToProps)(App);

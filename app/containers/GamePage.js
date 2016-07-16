@@ -78,8 +78,8 @@ class GamePage extends Component {
           <NavigationArrowBack style={styles.backArrow} />
         </Link>
         <h4 style={styles.heading}>
-          <Avatar size={35} style={styles.gameAvatar} src={'assets/img/' + this.props.game.imageUrl} />
-          {this.props.game.name}
+          <Avatar size={35} style={styles.gameAvatar} src={'assets/img/' + this.props.gamesMeta[this.props.game.gameId].imageUrl} />
+          {this.props.gamesMeta[this.props.game.gameId].name}
         </h4>
         <Tabs tabItemContainerStyle={styles.tabContainer}>
           <Tab label={<span>My Addons</span>} icon={<DeviceStorage />}>
@@ -138,7 +138,7 @@ function mapStateToProps(state, routerProps) {
   let currGame = null;
   for (let game of state.gamesList){
 
-    if (game.id == routerProps.params.gameId){
+    if (game.id == routerProps.params.id){
       currGame = game;
       break;
     }
@@ -146,6 +146,7 @@ function mapStateToProps(state, routerProps) {
 
   return {
     game: currGame,
+    gamesMeta: state.gamesMeta,
     filterText: state.filterInstalledAddons
   };
 }

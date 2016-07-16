@@ -2,11 +2,10 @@ import { ADD_GAME_TO_LIST, REMOVE_GAME_FROM_LIST } from '../actions/gamesList';
 
 const games = [
   {
-    id: 1,
+    id: 0,
+    gameId: 0,
     disabled: false,
-    name: "World of Warcraft: Legion",
-    imageUrl: "WOWIcon.png",
-    version: "Patch 7.0.3",
+    name: "WOW1",
     path: "C:/Program Files/World of Warcraft",
     installedAddons: [
       {
@@ -30,11 +29,10 @@ const games = [
   },
 
   {
-    id: 2,
-    disable: false,
-    name: "Elder Scrolls Online",
-    imageUrl: "TESOnlineIcon.png",
-    version: "Version 2.4.3",
+    id: 1,
+    gameId: 1,
+    disabled: false,
+    name: "ESO1",
     path: "C:/Bethesda Studios/TESO",
     installedAddons: []
   }
@@ -45,10 +43,16 @@ const initialState = games;
 let gamesList = (state = initialState, action) => {
   switch (action.type){
     case ADD_GAME_TO_LIST:
-          return [...state, action.game];
+          return [...state, {
+            id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1)+1,
+            gameId: action.game.gameId,
+            name: action.game.name,
+            disabled: action.game.disabled,
+            path: action.game.path,
+            installedAddons: []
+          }];
     case REMOVE_GAME_FROM_LIST:
-          console.log("hello");
-          return state;
+          return [...state.slice(0, action.gameId), ...state.slice(action.gameId + 1)];
     default:
           return state;
   }

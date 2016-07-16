@@ -1,4 +1,4 @@
-import { INCREMENT_CONFIG_STEPPER_STATE, DECREMENT_CONFIG_STEPPER_STATE } from '../actions/configureStepperState'
+import { INCREMENT_CONFIG_STEPPER_STATE, DECREMENT_CONFIG_STEPPER_STATE } from '../actions/configStepperState'
 
 let initialState = 0;
 

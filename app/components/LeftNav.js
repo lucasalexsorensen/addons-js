@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
+
 import { Link } from 'react-router';
 
-import { Drawer, Menu, MenuItem, Divider } from 'material-ui';
+import { Drawer, Badge, Menu, MenuItem, Divider } from 'material-ui';
 
 import ActionHome from 'material-ui/svg-icons/action/home';
 import ActionSettingsApplications from 'material-ui/svg-icons/action/settings-applications';
@@ -19,7 +21,7 @@ export default class LeftNav extends Component {
         zIndex: '1',
         maxWidth: 200,
         borderRight: '1px solid rgb(224, 224, 224)'
-      }
+      },
     };
 
     return(
@@ -33,7 +35,7 @@ export default class LeftNav extends Component {
           <Divider />
 
           <Link to="myGames" activeClassName="activeLink">
-            <MenuItem leftIcon={<HardwareVideogameAsset />}>My Games</MenuItem>
+            <MenuItem leftIcon={<HardwareVideogameAsset />}>My Games<Badge secondary={true} className='installationsBadge' badgeContent={<span>{this.props.numInstallations}</span>} /></MenuItem>
           </Link>
           <Divider />
 

@@ -3,12 +3,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { increment, decrement } from '../actions/configureStepperState';
+import { increment, decrement } from '../actions/configStepperState';
 import { openConfigure, closeConfigure } from '../actions/toggleConfigureDialog'
 import { openAddGame, closeAddGame } from '../actions/toggleNewGameDialog';
 import { addGame, removeGame } from '../actions/gamesList';
+import { updateGameType, updateGamePath, updateGameName } from '../actions/configNewInstallationForm';
 
-import { Dialog, DropDownMenu, MenuItem, TextField, Avatar, RaisedButton, IconButton, FlatButton, Stepper, Step, StepLabel, StepContent, List, ListItem, Checkbox } from 'material-ui';
+import { Dialog, SelectField, Divider, MenuItem, AutoComplete, TextField, Avatar, RaisedButton, IconButton, FlatButton, Stepper, Step, StepLabel, StepContent, List, ListItem, Checkbox } from 'material-ui';
 
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
@@ -45,6 +46,7 @@ class ConfigureDialog extends Component {
 
       removeButton: {
         borderRadius: 2,
+        width: 30,
         backgroundColor: '#ef5350',
         float: 'right',
         cursor: 'pointer'
@@ -54,19 +56,24 @@ class ConfigureDialog extends Component {
     if (this.props.games.length < 1){
       return (
         <div style={styles.container}>
+          <br/>
           <span>No games found :(</span>
           <br/><br/>
         </div>
       );
     }else{
-      return this.props.games.map((game) => {
+      return this.props.games.map((game, index) => {
         return (
-          <div key={game.id} style={styles.container}>
-            <ListItem disabled={true} leftAvatar={<Avatar style={{background: 'none'}}src={'assets/img/' + game.imageUrl}/>}>
-              {game.name}
-              <IconButton onClick={() => this.props.removeGame(game.id)} style={styles.removeButton} iconStyle={styles.removeIcon}>
+          <div key={index} style={styles.container}>
+            <Divider />
+            <ListItem disabled={true} leftAvatar={<Avatar style={{background: 'none'}}src={'assets/img/' + this.props.gamesMeta[game.gameId].imageUrl}/>}>
+              <IconButton onClick={() => this.props.removeGame(index)} style={styles.removeButton} iconStyle={styles.removeIcon}>
                 <NavigationClose color='white' />
               </IconButton>
+              {this.props.gamesMeta[game.gameId].name}
+              <br/>
+              <br/>
+              {game.path}
             </ListItem>
             <br/>
           </div>
@@ -75,37 +82,28 @@ class ConfigureDialog extends Component {
     }
   }
 
-  filterResults(searchText, key) {
-    return key.toLowerCase().indexOf(searchText.toLowerCase()) !== -1
+  handleTypeChange = (event, index, value) => this.props.updateGameType(value);
+
+  handlePathChange = (value) => this.props.updateGamePath(value);
+
+  handleNameChange = (event) => this.props.updateGameName(event.target.value);
+
+  getPathOptions() {
+    if (this.props.newFormState.gameTypeId === null){
+      return [];
+    }else{
+      return this.props.gamesMeta[this.props.newFormState.gameTypeId].suggestedPaths.map((path) => {
+         return path;
+      });
+    }
   }
 
-  addGameClicked() {
+  addGame() {
     this.props.addGame({
-      id: 3,
-      disabled: false,
-      name: "World of Warcraft: Legion",
-      imageUrl: "WOWIcon.png",
-      version: "Patch 7.0.3",
-      path: "C:/Program Files/World of Warcraft",
-      installedAddons: [
-        {
-          id: 8034,
-          iconUrl: "",
-          name: "Recount",
-          status: "Up to Date",
-          latestVersion: "4.0.5",
-          downloads: 1532980
-        },
-
-        {
-          id: 3093,
-          iconUrl: "",
-          name: "Skada",
-          status: "Up to Date",
-          latestVersion: "3.4b",
-          downloads: 92082
-        }
-      ]
+      gameId: this.props.newFormState.gameTypeId,
+      path: this.props.newFormState.gamePath,
+      name: this.props.newFormState.gameName,
+      disabled: false
     });
     this.props.closeAddGame();
   }
@@ -135,7 +133,7 @@ class ConfigureDialog extends Component {
       },
 
       list: {
-        //border: '1px solid #757575'
+
       },
 
       label: {
@@ -153,16 +151,41 @@ class ConfigureDialog extends Component {
 
         <Stepper orientation={'vertical'} activeStep={this.props.stepperState}>
           <Step>
+            <StepLabel>Configuration</StepLabel>
+            <StepContent>
+              <div>
+                <h6>Welcome to the configuration wizard. Let's get you properly set up!</h6>
+                <br/>
+                { this.renderStepButtons() }
+              </div>
+            </StepContent>
+          </Step>
+          <Step>
             <StepLabel>Locate game installations</StepLabel>
             <StepContent>
               <div>
-                <h5>Games:</h5>
+                <h5>Games installations:</h5>
                 <List style={styles.list}>
+                  <Divider />
                   { this.renderGameInstallations() }
-                  <RaisedButton onClick={() => this.props.openAddGame()} labelPosition={'before'} primary={true} style={styles.label} icon={<ContentAdd />}>
-                    Add game installation
-                  </RaisedButton>
-                  <br/><br/>
+                  <Divider />
+                </List>
+                <br/>
+                <RaisedButton onClick={() => this.props.openAddGame()} labelPosition={'before'} primary={true} style={styles.label} icon={<ContentAdd />}>
+                  Add game installation
+                </RaisedButton>
+                <br/><br/><br/>
+                { this.renderStepButtons() }
+              </div>
+            </StepContent>
+          </Step>
+          <Step>
+            <StepLabel>Addon DBs</StepLabel>
+            <StepContent>
+              <div>
+                <h6>Select addon DBs:</h6>
+                <List>
+                  <ListItem disabled={false} leftCheckbox={<Checkbox defaultChecked={true} />}>MMOui.org</ListItem>
                 </List>
                 <br/>
                 { this.renderStepButtons() }
@@ -170,30 +193,10 @@ class ConfigureDialog extends Component {
             </StepContent>
           </Step>
           <Step>
-            <StepLabel>Second step</StepLabel>
+            <StepLabel>Finishing up</StepLabel>
             <StepContent>
               <div>
-                <h6>Ayy lmao</h6>
-                <br/>
-                { this.renderStepButtons() }
-              </div>
-            </StepContent>
-          </Step>
-          <Step>
-            <StepLabel>Third step</StepLabel>
-            <StepContent>
-              <div>
-                <h6>Oyy lomao</h6>
-                <br/>
-                { this.renderStepButtons() }
-              </div>
-            </StepContent>
-          </Step>
-          <Step>
-            <StepLabel>Fourth step</StepLabel>
-            <StepContent>
-              <div>
-                <h6>A le mao</h6>
+                <h6><b>Looks like everything is good to go!</b><br/>Remember, these settings can always be modified later through the Settings pane.</h6>
                 <br/>
                 <RaisedButton primary={true} style={styles.closeButton} onClick={() => this.props.closeConfigure()}>Done</RaisedButton>
                 <FlatButton onClick={() => this.props.decrement()}>Back</FlatButton>
@@ -205,19 +208,50 @@ class ConfigureDialog extends Component {
         <br/><br/><br/>
 
         <Dialog title="Add new game installation" titleStyle={styles.heading} autoScrollBodyContent={true} open={this.props.newGameDialogState}>
-          <TextField
+          <IconButton onClick={() => this.props.closeAddGame()} style={styles.closeIcon}>
+            <NavigationClose />
+          </IconButton>
+
+          <SelectField
+            value={this.props.newFormState.gameTypeId}
+            onChange={this.handleTypeChange.bind(this)}
+            floatingLabelText="Game type"
+            floatingLabelFixed={true}
+            hintText="Select game type from list"
+          >
+            <MenuItem value={0} primaryText="World of Warcraft: Legion" />
+            <MenuItem value={1} primaryText="The Elder Scrolls Online" />
+          </SelectField>
+          <br/>
+          <AutoComplete
+            searchText={this.props.newFormState.gamePath}
+            dataSource={this.getPathOptions()}
+            onNewRequest={this.handlePathChange.bind(this)}
+            onUpdateInput={this.handlePathChange.bind(this)}
+            filter={() => {return true}}
+            openOnFocus={true}
+            floatingLabelText="Game path"
+            floatingLabelFixed={true}
             hintText="Path to installation"
-            fullWidth={true}
-            underlineShow={true}
+            fullWidth={false}
+            underlineShow={false}
+            menuStyle={{width: 400}}
+            listStyle={{width: 400}}
           />
-
-          <DropDownMenu hintText="Select game type from list">
-            <MenuItem label="World of Warcraft: Legion">World of Warcraft: Legion</MenuItem>
-            <MenuItem label="The Elder Scrolls Online">The Elder Scrolls Online</MenuItem>
-          </DropDownMenu>
-
-          <br/><br/><br/>
-          <RaisedButton primary={true} style={styles.closeButton} onClick={() => this.addGameClicked()}>Ayy</RaisedButton>
+          <br/>
+          <TextField
+            onChange={this.handleNameChange.bind(this)}
+            value={this.props.newFormState.gameName}
+            floatingLabelText="Game instance name"
+            floatingLabelFixed={true}
+            hintText="Name for game instance"
+            fullWidth={true}
+            underlineShow={false}
+            inputStyle={{width: 400}}
+          />
+          <br/><br/><br/><br/>
+          <RaisedButton primary={true} style={styles.closeButton} onClick={() => this.addGame()}>Add</RaisedButton>
+          <FlatButton onClick={() => this.props.closeAddGame()}>Close</FlatButton>
         </Dialog>
 
       </Dialog>
@@ -228,6 +262,8 @@ class ConfigureDialog extends Component {
 function mapStateToProps(state){
   return {
     games: state.gamesList,
+    gamesMeta: state.gamesMeta,
+    newFormState: state.configNewInstallationForm,
     stepperState: state.configStepperState,
     configDialogState: state.toggleConfigureDialog,
     newGameDialogState: state.toggleNewGameDialog
@@ -242,7 +278,10 @@ function mapDispatchToProps(dispatch){
     openAddGame: openAddGame,
     closeAddGame: closeAddGame,
     addGame: addGame,
-    removeGame: removeGame
+    removeGame: removeGame,
+    updateGameType: updateGameType,
+    updateGamePath: updateGamePath,
+    updateGameName: updateGameName
   }, dispatch)
 }
 

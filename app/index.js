@@ -47,7 +47,7 @@ render(
             <Route component={PageLayout}>
               <IndexRoute component={MyGames} />
             </Route>
-            <Route path=":gameId" component={GamePage} />
+            <Route path=":id" component={GamePage} />
           </Route>
 
           <Route path="settings">
