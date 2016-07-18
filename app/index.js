@@ -5,7 +5,7 @@ import configureStore from './store/configureStore';
 
 
 import { syncHistoryWithStore } from 'react-router-redux';
-import { IndexRoute, Route, Router, hashHistory } from 'react-router';
+import { IndexRoute, Route, Router, IndexRedirect, hashHistory } from 'react-router';
 
 const store = configureStore();
 
@@ -30,6 +30,11 @@ import GamePage from './containers/GamePage';
 import Settings from './containers/Settings';
 
 import PageLayout from './components/PageLayout';
+
+import InstalledAddons from './containers/InstalledAddons';
+import BrowseCategories from './containers/BrowseCategories';
+import CategoryPage from './containers/CategoryPage';
+import BrowseAllAddons from './containers/BrowseAllAddons';
 /* END containers */
 
 render(
@@ -37,6 +42,7 @@ render(
     <MuiThemeProvider>
       <Router history={history}>
         <Route component={App}>
+          <IndexRedirect to="/" />
           <Route path="/">
             <Route component={PageLayout}>
               <IndexRoute component={Home} />
@@ -47,7 +53,20 @@ render(
             <Route component={PageLayout}>
               <IndexRoute component={MyGames} />
             </Route>
-            <Route path=":id" component={GamePage} />
+            <Route path=":id" component={GamePage}>
+              <IndexRedirect to="installed"/>
+              <Route path="installed" component={InstalledAddons} />
+              <Route path="browse">
+                <IndexRedirect to="categories"/>
+                <Route path="all" component={BrowseAllAddons} />
+                <Route path="categories">
+                  <IndexRoute component={BrowseCategories} />
+                  <Route path=":catId">
+                    <IndexRoute component={CategoryPage} />
+                  </Route>
+                </Route>
+              </Route>
+            </Route>
           </Route>
 
           <Route path="settings">

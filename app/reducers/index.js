@@ -9,6 +9,7 @@ import configStepperState from './configStepperState';
 import configNewInstallationForm from './configNewInstallationForm'
 import toggleConfigureDialog from './toggleConfigureDialog';
 import toggleNewGameDialog from './toggleNewGameDialog';
+import addonsBrowse from './addonsBrowse';
 
 const rootReducer = combineReducers({
   toggleConfigureDialog,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   gamesMeta,
   filterGamesText,
   filterInstalledAddons,
+  addonsBrowse,
   routing
 });
 

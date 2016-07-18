@@ -28,7 +28,17 @@ body {
   background-color: rgb(224, 224, 224);
 }
 
+.activeGamePageTab {
+  /*font-weight: bold;
+  text-decoration: underline solid red;*/
+}
+
+.hidden{
+  display: none !important;
+}
+
 main {
+  overflow-x: hidden;
   cursor: default;
   padding-top: 40px;
   flex: 1;

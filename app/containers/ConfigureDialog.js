@@ -25,14 +25,14 @@ class ConfigureDialog extends Component {
     if (this.props.stepperState === 0) {
       return (
         <div>
-          <RaisedButton primary={true} style={styles.label} onClick={() => this.props.increment()}>Next</RaisedButton>
+          <RaisedButton label="Next" primary={true} style={styles.label} onClick={() => this.props.increment()} />
         </div>
       );
     }else{
       return (
         <div>
-          <RaisedButton primary={true} style={styles.label} onClick={() => this.props.increment()}>Next</RaisedButton>
-          <FlatButton onClick={() => this.props.decrement()}>Back</FlatButton>
+          <RaisedButton label="Next" primary={true} style={styles.label} onClick={() => this.props.increment()} />
+          <FlatButton label="Back" onClick={() => this.props.decrement()} />
         </div>
       )
     }
@@ -41,7 +41,7 @@ class ConfigureDialog extends Component {
   renderGameInstallations() {
     var styles = {
       container: {
-        marginLeft: 20,
+        marginLeft: 20
       },
 
       removeButton: {
@@ -171,9 +171,7 @@ class ConfigureDialog extends Component {
                   <Divider />
                 </List>
                 <br/>
-                <RaisedButton onClick={() => this.props.openAddGame()} labelPosition={'before'} primary={true} style={styles.label} icon={<ContentAdd />}>
-                  Add game installation
-                </RaisedButton>
+                <RaisedButton label="Add game installation" onClick={() => this.props.openAddGame()} labelPosition="after" primary={true} style={styles.label} icon={<ContentAdd />} />
                 <br/><br/><br/>
                 { this.renderStepButtons() }
               </div>
@@ -198,8 +196,8 @@ class ConfigureDialog extends Component {
               <div>
                 <h6><b>Looks like everything is good to go!</b><br/>Remember, these settings can always be modified later through the Settings pane.</h6>
                 <br/>
-                <RaisedButton primary={true} style={styles.closeButton} onClick={() => this.props.closeConfigure()}>Done</RaisedButton>
-                <FlatButton onClick={() => this.props.decrement()}>Back</FlatButton>
+                <RaisedButton label="Done" primary={true} style={styles.closeButton} onClick={() => this.props.closeConfigure()} />
+                <FlatButton label="Back" onClick={() => this.props.decrement()} />
               </div>
             </StepContent>
           </Step>
@@ -250,8 +248,8 @@ class ConfigureDialog extends Component {
             inputStyle={{width: 400}}
           />
           <br/><br/><br/><br/>
-          <RaisedButton primary={true} style={styles.closeButton} onClick={() => this.addGame()}>Add</RaisedButton>
-          <FlatButton onClick={() => this.props.closeAddGame()}>Close</FlatButton>
+          <RaisedButton label="Add" primary={true} style={styles.closeButton} onClick={() => this.addGame()} />
+          <FlatButton label="Close" onClick={() => this.props.closeAddGame()} />
         </Dialog>
 
       </Dialog>
