@@ -44,10 +44,10 @@ class GamePage extends Component {
           <Avatar size={40} style={styles.gameAvatar} src={'assets/img/' + this.props.gamesMeta[this.props.game.gameId].imageUrl} />
           {this.props.gamesMeta[this.props.game.gameId].name}
         </h4>
-        <h5 style={{textAlign: 'center', marginTop: -8,}}>{this.props.game.name}</h5>
+        <h5 style={{textAlign: 'center', marginTop: -8}}>{this.props.game.name}</h5>
 
         <div className="navbar-fixed">
-          <nav>
+          <nav style={{backgroundColor: 'rgb(0, 188, 212)'}}>
             <div className="nav-wrapper">
               <ul className="hide-on-med-and-down">
                 <li style={{marginLeft: 25}} className={isInstalledActive ? "active" : ""}>

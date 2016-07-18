@@ -5,15 +5,9 @@ import { bindActionCreators } from 'redux';
 
 import { TextField, GridList, GridTile } from 'material-ui';
 
-import { fetchCategories, updateCategoriesFilter } from '../actions/addonsBrowse';
+import { updateCategoriesFilter } from '../actions/addonsBrowse';
 
 class BrowseCategories extends Component {
-  componentWillMount(){
-    if (!this.props.addonsBrowse.items.length > 0){
-      this.props.fetchCategories("WOW");
-    }
-  }
-
   handleUpdateInput(event){
     this.props.updateCategoriesFilter(event.target.value);
   }
@@ -106,7 +100,7 @@ function mapStateToProps(state, routerProps) {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchCategories: fetchCategories, updateCategoriesFilter: updateCategoriesFilter}, dispatch)
+  return bindActionCreators({updateCategoriesFilter: updateCategoriesFilter}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BrowseCategories);

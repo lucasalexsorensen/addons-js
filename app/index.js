@@ -32,6 +32,7 @@ import Settings from './containers/Settings';
 import PageLayout from './components/PageLayout';
 
 import InstalledAddons from './containers/InstalledAddons';
+import BrowsePage from './containers/BrowsePage';
 import BrowseCategories from './containers/BrowseCategories';
 import CategoryPage from './containers/CategoryPage';
 import BrowseAllAddons from './containers/BrowseAllAddons';
@@ -56,7 +57,7 @@ render(
             <Route path=":id" component={GamePage}>
               <IndexRedirect to="installed"/>
               <Route path="installed" component={InstalledAddons} />
-              <Route path="browse">
+              <Route path="browse" component={BrowsePage}>
                 <IndexRedirect to="categories"/>
                 <Route path="all" component={BrowseAllAddons} />
                 <Route path="categories">
