@@ -21,7 +21,7 @@ class BrowseCategories extends Component {
       <div>
         <TextField
           onChange={this.handleUpdateInput.bind(this)}
-          value={this.props.addonsBrowse.categoriesFilter}
+          value={this.props.addonsBrowse.categories.filter}
           hintText="Search addon categories"
           style={{width: '80%', marginLeft: 'auto', marginRight: 'auto', display: 'block'}}
           underlineShow={true}
@@ -35,9 +35,9 @@ class BrowseCategories extends Component {
           margin: '-2px auto',
           display: 'flex',
           flexFlow: 'row wrap',
-          justifyContent: (this.props.addonsBrowse.isFetching) ? 'center' : 'flex-start'
+          justifyContent: (this.props.addonsBrowse.categories.isFetching) ? 'center' : 'flex-start'
         }}>
-          <div style={{alignSelf: 'center', position: 'absolute', display: (this.props.addonsBrowse.isFetching) ? 'flex' : 'none'}} >
+          <div style={{alignSelf: 'center', position: 'absolute', textAlign: 'center', display: (this.props.addonsBrowse.categories.isFetching) ? 'flex' : 'none'}} >
             <div className="preloader-wrapper active">
               <div className="spinner-layer spinner-blue-only">
                 <div className="circle-clipper left">
@@ -51,15 +51,16 @@ class BrowseCategories extends Component {
                 </div>
               </div>
             </div>
+            <p>Fetching from MMOUI...</p>
           </div>
-          {this.props.addonsBrowse.items.map((category) => {
+          {this.props.addonsBrowse.categories.items.map((category) => {
             return (
               <div key={category.UICATID} style={{
                 height: 80,
                 padding: 2,
                 boxSizing: 'border-box',
                 width: '25%',
-                display: (category.UICATTitle.toLowerCase().indexOf(this.props.addonsBrowse.categoriesFilter.toLowerCase()) !== -1) ? 'flex' : 'none'
+                display: (category.UICATTitle.toLowerCase().indexOf(this.props.addonsBrowse.categories.filter.toLowerCase()) !== -1) ? 'flex' : 'none'
               }}>
                 <Link style={{width: '100%'}} to={`/myGames/${this.props.game.gameId}/browse/categories/${category.UICATID}`}>
                   <div cols="1" rows="1" style={{position: 'relative', display: 'block', width: '100%', height: '100%', overflow: 'hidden'}}>

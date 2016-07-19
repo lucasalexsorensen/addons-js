@@ -3,12 +3,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { fetchCategories } from '../actions/addonsBrowse';
+import { fetchCategories, fetchAll } from '../actions/addonsBrowse';
 
 class BrowsePage extends Component {
   componentWillMount(){
-    if (!this.props.addonsBrowse.items.length > 0){
+    if (!this.props.addonsBrowse.categories.items.length > 0){
       this.props.fetchCategories("WOW");
+    }
+    if (!this.props.addonsBrowse.all.items.length > 0){
+      this.props.fetchAll("WOW");
     }
   }
 
@@ -28,7 +31,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchCategories: fetchCategories}, dispatch)
+  return bindActionCreators({fetchCategories: fetchCategories, fetchAll: fetchAll}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BrowsePage);
