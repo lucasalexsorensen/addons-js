@@ -1,15 +1,15 @@
-import { INCREMENT_CONFIG_STEPPER_STATE, DECREMENT_CONFIG_STEPPER_STATE } from '../actions/configStepperState'
+import { INCREMENT_CONFIG_STEPPER_STATE, DECREMENT_CONFIG_STEPPER_STATE } from '../actions/configStepperState';
 
 let initialState = 0;
 
 let configStepperState = (state = initialState, action) => {
-  switch (action.type){
+  switch (action.type) {
     case INCREMENT_CONFIG_STEPPER_STATE:
-          return state+1;
+      return state + 1;
     case DECREMENT_CONFIG_STEPPER_STATE:
-          return state-1;
+      return state - 1;
     default:
-          return state;
+      return state;
   }
 };
 

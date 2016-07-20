@@ -12,9 +12,9 @@ import HardwareVideogameAsset from 'material-ui/svg-icons/hardware/videogame-ass
 
 export default class LeftNav extends Component {
   render() {
-    var styles={
+    var styles = {
       leftDrawer: {
-        backgroundColor:'#eee',
+        backgroundColor: '#eee',
         boxShadow: 'none',
         overflowX: 'hidden',
         paddingTop: 56,
@@ -24,8 +24,8 @@ export default class LeftNav extends Component {
       },
     };
 
-    return(
-      <Drawer docked={true} open={true} containerStyle={styles.leftDrawer}>
+    return (
+      <Drawer docked open containerStyle={styles.leftDrawer}>
         <Menu>
           <Divider />
 
@@ -35,7 +35,7 @@ export default class LeftNav extends Component {
           <Divider />
 
           <Link to="myGames" activeClassName="activeLink">
-            <MenuItem leftIcon={<HardwareVideogameAsset />}>My Games<Badge secondary={true} className='installationsBadge' badgeContent={<span>{this.props.numInstallations}</span>} /></MenuItem>
+            <MenuItem leftIcon={<HardwareVideogameAsset />}>My Games<Badge secondary className="installationsBadge" badgeContent={<span>{this.props.numInstallations}</span>} /></MenuItem>
           </Link>
           <Divider />
 

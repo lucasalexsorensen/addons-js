@@ -20,7 +20,7 @@ export default class OsButtons extends Component {
       }
     };
 
-    return(
+    return (
       <div className={styles.container}>
         <IconButton onClick={this.closeHandler} iconStyle={styles.icon}>
           <NavigationClose color="white" />

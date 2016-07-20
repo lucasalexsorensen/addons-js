@@ -6,40 +6,40 @@ let initialState = {
 };
 
 let dialogs = (state = initialState, action) => {
-  switch(action.type){
+  switch (action.type) {
     case OPEN_CONFIGURE_DIALOG:
-          return {
-            ...state,
-            configure: true
-          };
+      return {
+        ...state,
+        configure: true
+      };
     case CLOSE_CONFIGURE_DIALOG:
-          return {
-            ...state,
-            configure: false
-          };
+      return {
+        ...state,
+        configure: false
+      };
     case TOGGLE_CONFIGURE_DIALOG:
-          return {
-            ...state,
-            configure: !state.configure
-          };
+      return {
+        ...state,
+        configure: !state.configure
+      };
     case OPEN_NEW_GAME_DIALOG:
-          return {
-            ...state,
-            newGame: true
-          };
+      return {
+        ...state,
+        newGame: true
+      };
     case CLOSE_NEW_GAME_DIALOG:
-          return {
-            ...state,
-            newGame: false
-          };
+      return {
+        ...state,
+        newGame: false
+      };
     case TOGGLE_NEW_GAME_DIALOG:
-          return {
-            ...state,
-            newGame: !state.configure
-          };
+      return {
+        ...state,
+        newGame: !state.configure
+      };
     default:
-          return state;
+      return state;
   }
-}
+};
 
 export default dialogs;

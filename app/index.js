@@ -55,10 +55,10 @@ render(
               <IndexRoute component={MyGames} />
             </Route>
             <Route path=":id" component={GamePage}>
-              <IndexRedirect to="installed"/>
+              <IndexRedirect to="installed" />
               <Route path="installed" component={InstalledAddons} />
               <Route path="browse" component={BrowsePage}>
-                <IndexRedirect to="categories"/>
+                <IndexRedirect to="categories" />
                 <Route path="all" component={BrowseAllAddons} />
                 <Route path="categories">
                   <IndexRoute component={BrowseCategories} />

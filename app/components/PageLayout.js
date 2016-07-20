@@ -6,7 +6,7 @@ export default class PageLayout extends Component {
       container: {
         paddingTop: 20
       }
-    }
+    };
 
     return (
       <div style={styles.container}>

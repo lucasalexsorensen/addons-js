@@ -28,19 +28,19 @@ class Settings extends Component {
     return (
       <div>
         <h3 style={styles.heading}>Settings</h3>
-        <br/><br/>
-        <RaisedButton onClick={() => this.props.openConfigure()} primary={true} style={styles.label} icon={<ActionSettings color='white' />} label="Open settings window" />
+        <br /><br />
+        <RaisedButton onClick={() => this.props.openConfigure()} primary style={styles.label} icon={<ActionSettings color="white" />} label="Open settings window" />
       </div>
     );
   }
 }
 
-function mapStateToProps(state){
-  return {}
+function mapStateToProps(state) {
+  return {};
 }
 
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({openConfigure: openConfigure}, dispatch)
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ openConfigure }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

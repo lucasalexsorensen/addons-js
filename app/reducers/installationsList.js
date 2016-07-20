@@ -5,24 +5,24 @@ const installations = [
     id: 0,
     gameId: 0,
     disabled: false,
-    name: "WOW1",
-    path: "C:/Program Files/World of Warcraft",
+    name: 'WOW1',
+    path: 'C:/Program Files/World of Warcraft',
     installedAddons: [
       {
         id: 12995,
-        iconUrl: "",
-        name: "_NPCScan",
-        status: "Update available",
-        latestVersion: "5.0.0.5",
+        iconUrl: '',
+        name: '_NPCScan',
+        status: 'Update available',
+        latestVersion: '5.0.0.5',
         downloads: 734506
       },
 
       {
         id: 4459,
-        iconUrl: "",
-        name: "Bagnon",
-        status: "Up to Date",
-        latestVersion: "5.4.15",
+        iconUrl: '',
+        name: 'Bagnon',
+        status: 'Up to Date',
+        latestVersion: '5.4.15',
         downloads: 1710241
       }
     ]
@@ -32,8 +32,8 @@ const installations = [
     id: 1,
     gameId: 1,
     disabled: false,
-    name: "ESO1",
-    path: "C:/Bethesda Studios/TESO",
+    name: 'ESO1',
+    path: 'C:/Bethesda Studios/TESO',
     installedAddons: []
   }
 ];
@@ -41,21 +41,21 @@ const installations = [
 const initialState = installations;
 
 let installationsList = (state = initialState, action) => {
-  switch (action.type){
+  switch (action.type) {
     case ADD_GAME_TO_LIST:
-          return [...state, {
-            id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1)+1,
-            gameId: action.game.gameId,
-            name: action.game.name,
-            disabled: action.game.disabled,
-            path: action.game.path,
-            installedAddons: []
-          }];
+      return [...state, {
+        id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
+        gameId: action.game.gameId,
+        name: action.game.name,
+        disabled: action.game.disabled,
+        path: action.game.path,
+        installedAddons: []
+      }];
     case REMOVE_GAME_FROM_LIST:
-          return [...state.slice(0, action.gameId), ...state.slice(action.gameId + 1)];
+      return [...state.slice(0, action.gameId), ...state.slice(action.gameId + 1)];
     default:
-          return state;
+      return state;
   }
-}
+};
 
 export default installationsList;

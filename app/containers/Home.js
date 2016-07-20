@@ -15,10 +15,10 @@ class Home extends Component {
     return (
       <div>
         <h3 style={styles.heading}>Welcome to addons.js!</h3>
-        <br/>
+        <br />
         <h5 style={styles.heading}>
           <b>Looks like this the first time you're using addons.js!</b>
-          <br/>
+          <br />
           Head on over to <Link to="settings"><b>Settings</b></Link> to get properly set up.
         </h5>
       </div>

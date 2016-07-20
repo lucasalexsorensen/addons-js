@@ -20,13 +20,14 @@ export default class Header extends Component {
       }
     };
 
-    return(
+    return (
       <div style={styles.container}>
         <AppBar title="addons.js"
-                style={styles.header}
-                touch={true}
-                showMenuIconButton={false}
-                iconElementRight={<OsButtons />}>
+          style={styles.header}
+          touch
+          showMenuIconButton={false}
+          iconElementRight={<OsButtons />}
+        >
         </AppBar>
       </div>
     );

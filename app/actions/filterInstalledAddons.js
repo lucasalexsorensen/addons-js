@@ -3,5 +3,5 @@ export function updateFilter(filterText) {
   return {
     type: UPDATE_INSTALLED_ADDONS_FILTER,
     filterText
-  }
+  };
 }

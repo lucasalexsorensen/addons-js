@@ -28,10 +28,10 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return {
     numInstallations: state.installationsList.length
-  }
+  };
 }
 
 export default connect(mapStateToProps)(App);

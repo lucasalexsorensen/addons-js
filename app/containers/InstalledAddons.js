@@ -11,16 +11,16 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close';
 class InstalledAddons extends Component {
   getSearchOptions() {
     return this.props.game.installedAddons.map((addon) => {
-      return (addon.name)
-    })
+      return (addon.name);
+    });
   }
 
-  handleUpdateInput(text){
+  handleUpdateInput(text) {
     this.props.updateFilter(text);
   }
 
   filterSearchOptions(searchText, key) {
-    return key.toLowerCase().indexOf(searchText.toLowerCase()) !== -1
+    return key.toLowerCase().indexOf(searchText.toLowerCase()) !== -1;
   }
 
   render() {
@@ -31,7 +31,7 @@ class InstalledAddons extends Component {
       }
     };
 
-    return(
+    return (
       <div>
         <AutoComplete
           onNewRequest={this.handleUpdateInput.bind(this)}
@@ -43,8 +43,8 @@ class InstalledAddons extends Component {
           filter={this.filterSearchOptions}
           style={styles.searchField}
         />
-        <Table multiSelectable={true} fixedHeader={true}>
-          <TableHeader adjustForCheckBox={true}>
+        <Table multiSelectable fixedHeader>
+          <TableHeader adjustForCheckBox>
             <TableRow>
               <TableHeaderColumn>Name</TableHeaderColumn>
               <TableHeaderColumn>Status</TableHeaderColumn>
@@ -52,17 +52,17 @@ class InstalledAddons extends Component {
               <TableHeaderColumn>Downloads</TableHeaderColumn>
             </TableRow>
           </TableHeader>
-          <TableBody showRowHover={true}>
+          <TableBody showRowHover>
             {this.props.game.installedAddons.map((addon) => {
               return (
-                <TableRow key={addon.id} style={{display: (addon.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1) ? 'table-row' : 'none'}}>
+                <TableRow key={addon.id} style={{ display: (addon.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1) ? 'table-row' : 'none' }}>
                   <TableRowColumn>{addon.name}</TableRowColumn>
                   <TableRowColumn>{addon.status}</TableRowColumn>
                   <TableRowColumn>{addon.latestVersion}</TableRowColumn>
                   <TableRowColumn>
                     {addon.downloads}
                     <IconButton style={styles.removeButton} iconStyle={styles.removeIcon}>
-                      <NavigationClose color='white' />
+                      <NavigationClose color="white" />
                     </IconButton>
                   </TableRowColumn>
                 </TableRow>
@@ -75,10 +75,10 @@ class InstalledAddons extends Component {
   }
 }
 
-function mapStateToProps(state, routerProps){
+function mapStateToProps(state, routerProps) {
   let currGame = null;
-  for (let game of state.installationsList){
-    if (game.id == routerProps.params.id){
+  for (let game of state.installationsList) {
+    if (game.id == routerProps.params.id) {
       currGame = game;
       break;
     }
@@ -88,11 +88,11 @@ function mapStateToProps(state, routerProps){
     game: currGame,
     gamesMeta: state.gamesMeta,
     filterText: state.filterInstalledAddons
-  }
+  };
 }
 
-function matchDispatchToProps(dispatch){
-  return bindActionCreators({updateFilter: updateFilter}, dispatch)
+function matchDispatchToProps(dispatch) {
+  return bindActionCreators({ updateFilter }, dispatch);
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(InstalledAddons);

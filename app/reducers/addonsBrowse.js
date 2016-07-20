@@ -18,46 +18,46 @@ let initialState = {
 };
 
 let addonsBrowse = (state = initialState, action) => {
-  switch(action.type){
+  switch (action.type) {
     case REQUEST_CATEGORIES:
-          return {
-            ...state,
-            categories: {
-              ...state.categories,
-              isFetching: true
-            }
-          };
+      return {
+        ...state,
+        categories: {
+          ...state.categories,
+          isFetching: true
+        }
+      };
     case RECEIVE_CATEGORIES:
-          return {
-            ...state,
-            categories: {
-              ...state.categories,
-              isFetching: false,
-              items: action.categories.sort((a, b) => {
-                /*if (a.UICATTitle < b.UICATTitle) return -1;
+      return {
+        ...state,
+        categories: {
+          ...state.categories,
+          isFetching: false,
+          items: action.categories.sort((a, b) => {
+                /* if (a.UICATTitle < b.UICATTitle) return -1;
                 if (a.UICATTitle > b.UICATTitle) return 1;*/
-                return a.UICATID - b.UICATID;
-              }),
-              lastUpdated: action.receivedAt
-            }
-          };
+            return a.UICATID - b.UICATID;
+          }),
+          lastUpdated: action.receivedAt
+        }
+      };
     case UPDATE_CATEGORIES_FILTER:
-          return {
-            ...state,
-            categories: {
-              ...state.categories,
-              filter: action.text
-            }
-          };
+      return {
+        ...state,
+        categories: {
+          ...state.categories,
+          filter: action.text
+        }
+      };
 
     case UPDATE_CATEGORY_PAGE_FILTER:
-          return {
-            ...state,
-            categories: {
-              ...state.categories,
-              pageFilter: action.text
-            }
-          };
+      return {
+        ...state,
+        categories: {
+          ...state.categories,
+          pageFilter: action.text
+        }
+      };
 
 
     case REQUEST_ALL_ADDONS:
@@ -75,7 +75,7 @@ let addonsBrowse = (state = initialState, action) => {
           ...state.all,
           isFetching: false,
           items: action.items,
-          categorized: _.groupBy(action.items, (obj) => { return obj.UICATID }),
+          categorized: _.groupBy(action.items, (obj) => { return obj.UICATID; }),
           lastUpdated: action.receivedAt
         }
       };
@@ -88,7 +88,7 @@ let addonsBrowse = (state = initialState, action) => {
         }
       };
     default:
-          return state;
+      return state;
   }
 };
 

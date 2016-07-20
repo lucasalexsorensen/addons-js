@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { FlatButton, TextField, Table, TableHeader, TableBody, TableRow, TableHeaderColumn, TableRowColumn } from 'material-ui';
 
 class BrowseAllAddons extends Component {
-  render(){
+  render() {
     var styles = {
       container: {
         paddingTop: 20
@@ -18,14 +18,14 @@ class BrowseAllAddons extends Component {
       }
     };
 
-    return(
+    return (
       <div style={styles.container}>
-        <FlatButton style={{position: 'fixed', marginTop: 0}} href={`#/myGames/${this.props.game.id}/browse`} icon={<NavigationArrowBack color='black' />} label="to categories" />
+        <FlatButton style={{ position: 'fixed', marginTop: 0 }} href={`#/myGames/${this.props.game.id}/browse`} icon={<NavigationArrowBack color="black" />} label="to categories" />
 
-        <h5 style={{textAlign: 'center', marginTop: 5}}>All Addons</h5>
+        <h5 style={{ textAlign: 'center', marginTop: 5 }}>All Addons</h5>
 
-        <Table height={'45vh'} fixedHeader={true}>
-          <TableHeader style={{backgroundColor: 'rgb(0, 188, 212)' }} displaySelectAll={false} adjustForCheckbox={false}>
+        <Table height={'45vh'} fixedHeader>
+          <TableHeader style={{ backgroundColor: 'rgb(0, 188, 212)' }} displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
               <TableHeaderColumn style={styles.headerColumn}><b>Name</b></TableHeaderColumn>
               <TableHeaderColumn style={styles.headerColumn}><b>Status</b></TableHeaderColumn>
@@ -33,7 +33,7 @@ class BrowseAllAddons extends Component {
               <TableHeaderColumn style={styles.headerColumn}><b>Downloads</b></TableHeaderColumn>
             </TableRow>
           </TableHeader>
-          <TableBody displayRowCheckbox={false} showRowHover={true}>
+          <TableBody displayRowCheckbox={false} showRowHover>
             {this.props.addonsBrowse.all.items.map((addon) => {
               return (
                 <TableRow key={addon.UID} selectable={false} >
@@ -48,13 +48,13 @@ class BrowseAllAddons extends Component {
         </Table>
 
       </div>
-    )
+    );
   }
 }
 
-function mapStatetoProps(state, routerProps){
+function mapStatetoProps(state, routerProps) {
   let currGame = null;
-  for (let game of state.installationsList){
+  for (let game of state.installationsList) {
     if (game.id == routerProps.params.id) {
       currGame = game;
       break;
@@ -67,8 +67,8 @@ function mapStatetoProps(state, routerProps){
   };
 }
 
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({updateAllFilter: updateAllFilter}, dispatch);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ updateAllFilter }, dispatch);
 }
 
 export default connect(mapStatetoProps, mapDispatchToProps)(BrowseAllAddons);

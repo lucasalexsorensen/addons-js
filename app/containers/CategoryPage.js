@@ -10,7 +10,7 @@ import { FlatButton, TextField, Table, TableHeader, TableBody, TableRow, TableHe
 import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 
 class CategoryPage extends Component {
-  componentDidMount(){
+  componentDidMount() {
 
   }
 
@@ -49,22 +49,22 @@ class CategoryPage extends Component {
 
     return (
       <div style={styles.container}>
-        <FlatButton style={{position: 'fixed', marginTop: 0}} href={`#/myGames/${this.props.game.id}/browse`} icon={<NavigationArrowBack color='black' />} label="to categories" />
+        <FlatButton style={{ position: 'fixed', marginTop: 0 }} href={`#/myGames/${this.props.game.id}/browse`} icon={<NavigationArrowBack color="black" />} label="to categories" />
 
-        <h5 style={{textAlign: 'center', marginTop: 5}}>{this.props.category.UICATTitle || "Cat not found"}</h5>
+        <h5 style={{ textAlign: 'center', marginTop: 5 }}>{this.props.category.UICATTitle || 'Cat not found'}</h5>
 
         <TextField
           onChange={this.handleUpdateInput.bind(this)}
           value={this.props.addonsBrowse.categories.pageFilter}
           hintText={`Search ${this.props.category.UICATTitle}`}
-          inputStyle={{textAlign: 'center'}}
-          underlineShow={true}
+          inputStyle={{ textAlign: 'center' }}
+          underlineShow
           fullWidth={false}
-          style={{display: 'block', marginRight: 'auto', marginLeft: 'auto' }}
+          style={{ display: 'block', marginRight: 'auto', marginLeft: 'auto' }}
         />
 
-        <Table height={'45vh'} fixedHeader={true}>
-          <TableHeader style={{backgroundColor: 'rgb(0, 188, 212)' }} displaySelectAll={false} adjustForCheckbox={false}>
+        <Table height={'45vh'} fixedHeader>
+          <TableHeader style={{ backgroundColor: 'rgb(0, 188, 212)' }} displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
               <TableHeaderColumn style={styles.headerColumn}><b>Name</b></TableHeaderColumn>
               <TableHeaderColumn style={styles.headerColumn}><b>Status</b></TableHeaderColumn>
@@ -72,10 +72,10 @@ class CategoryPage extends Component {
               <TableHeaderColumn style={styles.headerColumn}><b>Downloads</b></TableHeaderColumn>
             </TableRow>
           </TableHeader>
-          <TableBody displayRowCheckbox={false} showRowHover={true}>
+          <TableBody displayRowCheckbox={false} showRowHover>
             {this.props.addonsBrowse.all.categorized[this.props.category.UICATID].map((addon) => {
               return (
-                <TableRow key={addon.UID} style={{display: (addon.UIName.toLowerCase().indexOf(this.props.addonsBrowse.categories.pageFilter) !== -1) ? 'table-row' : 'none'}}>
+                <TableRow key={addon.UID} style={{ display: (addon.UIName.toLowerCase().indexOf(this.props.addonsBrowse.categories.pageFilter) !== -1) ? 'table-row' : 'none' }}>
                   <TableRowColumn>{addon.UIName}</TableRowColumn>
                   <TableRowColumn>Not installed</TableRowColumn>
                   <TableRowColumn>{addon.UIVersion}</TableRowColumn>
@@ -86,11 +86,11 @@ class CategoryPage extends Component {
           </TableBody>
         </Table>
       </div>
-    )
+    );
   }
 }
 
-function mapStateToProps(state, routerProps){
+function mapStateToProps(state, routerProps) {
   let currCategory = null;
   let currGame = null;
   for (let category of state.addonsBrowse.categories.items) {
@@ -99,7 +99,7 @@ function mapStateToProps(state, routerProps){
       break;
     }
   }
-  for (let game of state.installationsList){
+  for (let game of state.installationsList) {
     if (game.id == routerProps.params.id) {
       currGame = game;
       break;
@@ -110,11 +110,11 @@ function mapStateToProps(state, routerProps){
     category: currCategory,
     game: currGame,
     addonsBrowse: state.addonsBrowse
-  }
+  };
 }
 
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({updateCategoryPageFilter: updateCategoryPageFilter}, dispatch)
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ updateCategoryPageFilter }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryPage);

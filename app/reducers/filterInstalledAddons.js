@@ -5,9 +5,9 @@ let initialState = '';
 let filterInstalledAddons = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_INSTALLED_ADDONS_FILTER:
-          return action.filterText;
+      return action.filterText;
     default:
-          return state;
+      return state;
   }
 };
 

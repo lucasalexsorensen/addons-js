@@ -8,14 +8,14 @@ export const UPDATE_ALL_ADDONS_FILTER = 'UPDATE_ALL_ADDONS_FILTER';
 
 export const UPDATE_CATEGORY_PAGE_FILTER = 'UPDATE_CATEGORY_PAGE_FILTER';
 
-export function requestCategories(gameName){
+export function requestCategories(gameName) {
   return {
     type: REQUEST_CATEGORIES,
     gameName
   };
 }
 
-export function receiveCategories(gameName, json){
+export function receiveCategories(gameName, json) {
   return {
     type: RECEIVE_CATEGORIES,
     gameName,
@@ -24,40 +24,40 @@ export function receiveCategories(gameName, json){
   };
 }
 
-export function fetchCategories(gameName){
+export function fetchCategories(gameName) {
   return dispatch => {
     dispatch(requestCategories());
     return fetch(`https://api.mmoui.com/v3/game/${gameName}/categorylist.json`)
       .then(response => response.json())
       .then(json => {
-        dispatch(receiveCategories(gameName, json))
-      })
-  }
+        dispatch(receiveCategories(gameName, json));
+      });
+  };
 }
 
-export function updateCategoriesFilter(text){
+export function updateCategoriesFilter(text) {
   return {
     type: UPDATE_CATEGORIES_FILTER,
     text
-  }
+  };
 }
 
-export function updateCategoryPageFilter(text){
+export function updateCategoryPageFilter(text) {
   return {
     type: UPDATE_CATEGORY_PAGE_FILTER,
     text
-  }
+  };
 }
 
 
-export function requestAll(gameName){
+export function requestAll(gameName) {
   return {
     type: REQUEST_ALL_ADDONS,
     gameName
   };
 }
 
-export function receiveAll(gameName, json){
+export function receiveAll(gameName, json) {
   return {
     type: RECEIVE_ALL_ADDONS,
     gameName,
@@ -66,22 +66,21 @@ export function receiveAll(gameName, json){
   };
 }
 
-export function fetchAll(gameName){
+export function fetchAll(gameName) {
   return dispatch => {
     dispatch(requestAll());
     return fetch(`https://api.mmoui.com/v3/game/${gameName}/filelist.json`)
       .then(response => response.json())
       .then(json => {
-        dispatch(receiveAll(gameName, json))
-      })
-  }
+        dispatch(receiveAll(gameName, json));
+      });
+  };
 }
 
-export function updateAllFilter(text){
+export function updateAllFilter(text) {
   return {
     type: UPDATE_ALL_ADDONS_FILTER,
     text
-  }
+  };
 }
-
 

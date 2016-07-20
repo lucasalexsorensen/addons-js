@@ -11,7 +11,7 @@ class MyGames extends Component {
   createGameEntries() {
     return this.props.installations.map((installation) => {
       if (installation.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1
-        || this.props.gamesMeta[installation.gameId].name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1){
+        || this.props.gamesMeta[installation.gameId].name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1) {
         return (
           <GameEntry
             key={installation.id}
@@ -19,8 +19,9 @@ class MyGames extends Component {
             name={installation.name}
             version={this.props.gamesMeta[installation.gameId].version}
             gameName={this.props.gamesMeta[installation.gameId].name}
-            imageUrl={this.props.gamesMeta[installation.gameId].imageUrl} />
-        )
+            imageUrl={this.props.gamesMeta[installation.gameId].imageUrl}
+          />
+        );
       }
     });
   }
@@ -59,10 +60,10 @@ class MyGames extends Component {
           onChange={this.handleUpdateInput.bind(this)}
           value={this.props.filterText}
           hintText="Search games"
-          underlineShow={true}
-          fullWidth={true}
+          underlineShow
+          fullWidth
         />
-        <span style={{marginTop: 45, fontSize: 20, textAlign: 'center', display: (this.props.installations.length > 0) ? 'none' : 'block'}}><b>No installations found :(</b><br/>Add game installations in the settings pane to get started!</span>
+        <span style={{ marginTop: 45, fontSize: 20, textAlign: 'center', display: (this.props.installations.length > 0) ? 'none' : 'block' }}><b>No installations found :(</b><br />Add game installations in the settings pane to get started!</span>
         <ul style={styles.entriesContainer}>
           {this.createGameEntries()}
         </ul>
@@ -80,7 +81,7 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({updateFilter: updateFilter}, dispatch)
+  return bindActionCreators({ updateFilter }, dispatch);
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(MyGames);

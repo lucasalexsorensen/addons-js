@@ -5,9 +5,9 @@ let initialState = '';
 let filterGamesText = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_MYGAMES_FILTER:
-          return action.filterText;
+      return action.filterText;
     default:
-          return state;
+      return state;
   }
 };
 

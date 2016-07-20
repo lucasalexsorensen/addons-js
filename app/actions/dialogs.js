@@ -38,5 +38,5 @@ export function closeAddGame() {
 export function toggleAddGame() {
   return {
     type: TOGGLE_NEW_GAME_DIALOG
-  }
+  };
 }

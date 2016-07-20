@@ -5,12 +5,12 @@ export function addGame(game) {
   return {
     type: ADD_GAME_TO_LIST,
     game
-  }
+  };
 }
 
-export function removeGame(gameId){
+export function removeGame(gameId) {
   return {
     type: REMOVE_GAME_FROM_LIST,
     gameId
-  }
+  };
 }
