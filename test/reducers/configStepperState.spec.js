@@ -8,11 +8,11 @@ describe('reducers', () => {
     it('should handle initial state', () => {
       expect(configStepperState(undefined, {})).to.equal(0);
     });
-
+    
     it('should handle INCREMENT_CONFIG_STEPPER_STATE', () => {
       expect(configStepperState(1, { type: INCREMENT_CONFIG_STEPPER_STATE })).to.equal(2);
     });
-
+    
     it('should handle DECREMENT_CONFIG_STEPPER_STATE', () => {
       expect(configStepperState(1, { type: DECREMENT_CONFIG_STEPPER_STATE })).to.equal(0);
     });

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { openConfigure } from '../actions/toggleConfigureDialog';
+import { openConfigure } from '../actions/dialogs';
 
 import { RaisedButton } from 'material-ui';
 import ActionSettings from 'material-ui/svg-icons/action/settings';

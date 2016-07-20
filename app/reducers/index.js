@@ -7,13 +7,11 @@ import filterGamesText from './filterGamesText' ;
 import filterInstalledAddons from './filterInstalledAddons';
 import configStepperState from './configStepperState';
 import configNewInstallationForm from './configNewInstallationForm'
-import toggleConfigureDialog from './toggleConfigureDialog';
-import toggleNewGameDialog from './toggleNewGameDialog';
+import dialogs from './dialogs';
 import addonsBrowse from './addonsBrowse';
 
 const rootReducer = combineReducers({
-  toggleConfigureDialog,
-  toggleNewGameDialog,
+  dialogs,
   configStepperState,
   configNewInstallationForm,
   installationsList,

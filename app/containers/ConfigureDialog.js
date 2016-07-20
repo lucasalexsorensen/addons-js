@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { increment, decrement } from '../actions/configStepperState';
-import { openConfigure, closeConfigure } from '../actions/toggleConfigureDialog'
-import { openAddGame, closeAddGame } from '../actions/toggleNewGameDialog';
+import { openConfigure, closeConfigure, openAddGame, closeAddGame } from '../actions/dialogs'
 import { addGame, removeGame } from '../actions/installationsList';
 import { updateGameType, updateGamePath, updateGameName } from '../actions/configNewInstallationForm';
 
@@ -109,7 +108,7 @@ class ConfigureDialog extends Component {
     this.props.updateGameType(0);
     this.props.updateGamePath('');
     this.props.updateGameName('');
-    
+
     this.props.closeAddGame();
   }
 
@@ -149,7 +148,7 @@ class ConfigureDialog extends Component {
     };
 
     return (
-      <Dialog title='Configure addons.js' titleStyle={styles.heading} contentStyle={styles.dialog} autoScrollBodyContent={true} style={styles.dialog} open={this.props.configDialogState}>
+      <Dialog title='Configure addons.js' titleStyle={styles.heading} contentStyle={styles.dialog} autoScrollBodyContent={true} style={styles.dialog} open={this.props.dialogs.configure}>
         <IconButton onClick={() => this.props.closeConfigure()} style={styles.closeIcon}>
           <NavigationClose />
         </IconButton>
@@ -210,7 +209,7 @@ class ConfigureDialog extends Component {
 
         <br/><br/><br/>
 
-        <Dialog title="Add new game installation" titleStyle={styles.heading} autoScrollBodyContent={true} open={this.props.newGameDialogState}>
+        <Dialog title="Add new game installation" titleStyle={styles.heading} autoScrollBodyContent={true} open={this.props.dialogs.newGame}>
           <IconButton onClick={() => this.props.closeAddGame()} style={styles.closeIcon}>
             <NavigationClose />
           </IconButton>
@@ -268,8 +267,7 @@ function mapStateToProps(state){
     gamesMeta: state.gamesMeta,
     newFormState: state.configNewInstallationForm,
     stepperState: state.configStepperState,
-    configDialogState: state.toggleConfigureDialog,
-    newGameDialogState: state.toggleNewGameDialog
+    dialogs: state.dialogs,
   }
 }
 
