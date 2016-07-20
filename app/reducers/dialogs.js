@@ -18,10 +18,9 @@ let dialogs = (state = initialState, action) => {
         configure: false
       };
     case TOGGLE_CONFIGURE_DIALOG:
-      return {
-        ...state,
+      return Object.assign({}, state, {
         configure: !state.configure
-      };
+      });
     case OPEN_NEW_GAME_DIALOG:
       return {
         ...state,
@@ -33,10 +32,9 @@ let dialogs = (state = initialState, action) => {
         newGame: false
       };
     case TOGGLE_NEW_GAME_DIALOG:
-      return {
-        ...state,
-        newGame: !state.configure
-      };
+      return Object.assign({}, state, {
+        newGame: !state.newGame
+      });
     default:
       return state;
   }
