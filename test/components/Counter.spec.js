@@ -1,4 +1,5 @@
-/* eslint no-unused-expressions: 0 */
+//* eslint no-unused-expressions: 0 */
+/*
 import { expect } from 'chai';
 import { spy } from 'sinon';
 import React from 'react';
@@ -58,3 +59,4 @@ describe('Counter component', () => {
     expect(actions.incrementAsync.called).to.be.true;
   });
 });
+*/

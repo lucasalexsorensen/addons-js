@@ -3,17 +3,15 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { TextField, GridList, GridTile } from 'material-ui';
+import { TextField, FlatButton } from 'material-ui';
 
 import { updateCategoriesFilter } from '../actions/addonsBrowse';
+
+import NavigationArrowForward from 'material-ui/svg-icons/navigation/arrow-forward';
 
 class BrowseCategories extends Component {
   handleUpdateInput(event){
     this.props.updateCategoriesFilter(event.target.value);
-  }
-
-  renderCategories() {
-    let mainCats = ['19','94','20','22','112','18','55','39','25','26','155','17','95','109','24','97','100','146','146','96','45','114','113','40','98','147','21','27','154'];
   }
 
   render() {
@@ -23,11 +21,13 @@ class BrowseCategories extends Component {
           onChange={this.handleUpdateInput.bind(this)}
           value={this.props.addonsBrowse.categories.filter}
           hintText="Search addon categories"
-          style={{width: '80%', marginLeft: 'auto', marginRight: 'auto', display: 'block'}}
+          style={{width: '60%', marginLeft: '4%'}}
           underlineShow={true}
         />
-        <br/>
 
+        <FlatButton labelPosition='before' style={{position: 'absolute', right: 20, marginTop: 12}} href={`#/myGames/${this.props.game.id}/browse/all`} icon={<NavigationArrowForward color='black' />} label="browse all addons" />
+
+        <br/><br/>
         <div style={{
           width: '80%',
           overflowY: 'auto',
