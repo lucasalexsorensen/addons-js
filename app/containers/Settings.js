@@ -29,7 +29,7 @@ class Settings extends Component {
       <div>
         <h3 style={styles.heading}>Settings</h3>
         <br/><br/>
-        <RaisedButton onClick={() => this.props.openConfigure()} primary={true} style={styles.label} icon={<ActionSettings color='white' />} label="Configure" />
+        <RaisedButton onClick={() => this.props.openConfigure()} primary={true} style={styles.label} icon={<ActionSettings color='white' />} label="Open settings window" />
       </div>
     );
   }

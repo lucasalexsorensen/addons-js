@@ -30,7 +30,7 @@ class App extends Component {
 
 function mapStateToProps(state){
   return {
-    numInstallations: state.gamesList.length
+    numInstallations: state.installationsList.length
   }
 }
 

@@ -26,7 +26,8 @@ class BrowsePage extends Component {
 
 function mapStateToProps(state){
   return {
-    addonsBrowse: state.addonsBrowse
+    addonsBrowse: state.addonsBrowse,
+    gamesMeta: state.gamesMeta
   }
 }
 

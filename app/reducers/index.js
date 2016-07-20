@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
 import counter from './counter';
-import gamesList from './gamesList'
+import installationsList from './installationsList'
 import gamesMeta from './gamesMeta'
 import filterGamesText from './filterGamesText' ;
 import filterInstalledAddons from './filterInstalledAddons';
@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   toggleNewGameDialog,
   configStepperState,
   configNewInstallationForm,
-  gamesList,
+  installationsList,
   gamesMeta,
   filterGamesText,
   filterInstalledAddons,

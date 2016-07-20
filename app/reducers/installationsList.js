@@ -1,6 +1,6 @@
-import { ADD_GAME_TO_LIST, REMOVE_GAME_FROM_LIST } from '../actions/gamesList';
+import { ADD_GAME_TO_LIST, REMOVE_GAME_FROM_LIST } from '../actions/installationsList';
 
-const games = [
+const installations = [
   {
     id: 0,
     gameId: 0,
@@ -38,9 +38,9 @@ const games = [
   }
 ];
 
-const initialState = games;
+const initialState = installations;
 
-let gamesList = (state = initialState, action) => {
+let installationsList = (state = initialState, action) => {
   switch (action.type){
     case ADD_GAME_TO_LIST:
           return [...state, {
@@ -58,4 +58,4 @@ let gamesList = (state = initialState, action) => {
   }
 }
 
-export default gamesList;
+export default installationsList;

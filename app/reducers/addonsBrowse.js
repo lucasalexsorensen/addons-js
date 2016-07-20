@@ -1,8 +1,10 @@
-import { REQUEST_CATEGORIES, RECEIVE_CATEGORIES, UPDATE_CATEGORIES_FILTER, REQUEST_ALL_ADDONS, RECEIVE_ALL_ADDONS, UPDATE_ALL_ADDONS_FILTER } from '../actions/addonsBrowse';
+import { REQUEST_CATEGORIES, RECEIVE_CATEGORIES, UPDATE_CATEGORIES_FILTER, UPDATE_CATEGORY_PAGE_FILTER, REQUEST_ALL_ADDONS, RECEIVE_ALL_ADDONS, UPDATE_ALL_ADDONS_FILTER } from '../actions/addonsBrowse';
+import _ from 'underscore';
 
 let initialState = {
   categories: {
     filter: '',
+    pageFilter: '',
     isFetching: false,
     items: []
   },
@@ -10,7 +12,8 @@ let initialState = {
   all: {
     filter: '',
     isFetching: false,
-    items: []
+    items: [],
+    categorized: []
   }
 };
 
@@ -31,9 +34,9 @@ let addonsBrowse = (state = initialState, action) => {
               ...state.categories,
               isFetching: false,
               items: action.categories.sort((a, b) => {
-                if (a.UICATTitle < b.UICATTitle) return -1;
-                if (a.UICATTitle > b.UICATTitle) return 1;
-                return 0;
+                /*if (a.UICATTitle < b.UICATTitle) return -1;
+                if (a.UICATTitle > b.UICATTitle) return 1;*/
+                return a.UICATID - b.UICATID;
               }),
               lastUpdated: action.receivedAt
             }
@@ -44,6 +47,15 @@ let addonsBrowse = (state = initialState, action) => {
             categories: {
               ...state.categories,
               filter: action.text
+            }
+          };
+
+    case UPDATE_CATEGORY_PAGE_FILTER:
+          return {
+            ...state,
+            categories: {
+              ...state.categories,
+              pageFilter: action.text
             }
           };
 
@@ -62,7 +74,8 @@ let addonsBrowse = (state = initialState, action) => {
         all: {
           ...state.all,
           isFetching: false,
-          items: action.addons,
+          items: action.items,
+          categorized: _.groupBy(action.items, (obj) => { return obj.UICATID }),
           lastUpdated: action.receivedAt
         }
       };

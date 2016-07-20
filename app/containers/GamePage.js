@@ -74,7 +74,7 @@ GamePage.contextTypes = {
 
 function mapStateToProps(state, routerProps){
   let currGame = null;
-  for (let game of state.gamesList){
+  for (let game of state.installationsList){
     if (game.id == routerProps.params.id){
       currGame = game;
       break;

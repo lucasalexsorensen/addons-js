@@ -9,17 +9,17 @@ import { TextField } from 'material-ui';
 
 class MyGames extends Component {
   createGameEntries() {
-    return this.props.games.map((game) => {
-      if (game.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1
-        || this.props.gamesMeta[game.gameId].name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1){
+    return this.props.installations.map((installation) => {
+      if (installation.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1
+        || this.props.gamesMeta[installation.gameId].name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1){
         return (
           <GameEntry
-            key={game.id}
-            id={game.id}
-            name={game.name}
-            version={this.props.gamesMeta[game.gameId].version}
-            gameName={this.props.gamesMeta[game.gameId].name}
-            imageUrl={this.props.gamesMeta[game.gameId].imageUrl} />
+            key={installation.id}
+            id={installation.id}
+            name={installation.name}
+            version={this.props.gamesMeta[installation.gameId].version}
+            gameName={this.props.gamesMeta[installation.gameId].name}
+            imageUrl={this.props.gamesMeta[installation.gameId].imageUrl} />
         )
       }
     });
@@ -62,6 +62,7 @@ class MyGames extends Component {
           underlineShow={true}
           fullWidth={true}
         />
+        <span style={{marginTop: 45, fontSize: 20, textAlign: 'center', display: (this.props.installations.length > 0) ? 'none' : 'block'}}><b>No installations found :(</b><br/>Add game installations in the settings pane to get started!</span>
         <ul style={styles.entriesContainer}>
           {this.createGameEntries()}
         </ul>
@@ -72,7 +73,7 @@ class MyGames extends Component {
 
 function mapStateToProps(state) {
   return {
-    games: state.gamesList,
+    installations: state.installationsList,
     gamesMeta: state.gamesMeta,
     filterText: state.filterGamesText
   };

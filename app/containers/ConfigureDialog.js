@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { increment, decrement } from '../actions/configStepperState';
 import { openConfigure, closeConfigure } from '../actions/toggleConfigureDialog'
 import { openAddGame, closeAddGame } from '../actions/toggleNewGameDialog';
-import { addGame, removeGame } from '../actions/gamesList';
+import { addGame, removeGame } from '../actions/installationsList';
 import { updateGameType, updateGamePath, updateGameName } from '../actions/configNewInstallationForm';
 
 import { Dialog, SelectField, Divider, MenuItem, AutoComplete, TextField, Avatar, RaisedButton, IconButton, FlatButton, Stepper, Step, StepLabel, StepContent, List, ListItem, Checkbox } from 'material-ui';
@@ -46,7 +46,7 @@ class ConfigureDialog extends Component {
 
       removeButton: {
         borderRadius: 2,
-        width: 30,
+        //width: 30,
         backgroundColor: '#ef5350',
         float: 'right',
         cursor: 'pointer'
@@ -57,7 +57,7 @@ class ConfigureDialog extends Component {
       return (
         <div style={styles.container}>
           <br/>
-          <span>No games found :(</span>
+          <span><b>No installations found :(</b><br/>Add a game installation using the button below to start using addons.js!</span>
           <br/><br/>
         </div>
       );
@@ -105,6 +105,11 @@ class ConfigureDialog extends Component {
       name: this.props.newFormState.gameName,
       disabled: false
     });
+    /* Clear form input states */
+    this.props.updateGameType(0);
+    this.props.updateGamePath('');
+    this.props.updateGameName('');
+    
     this.props.closeAddGame();
   }
 
@@ -164,7 +169,7 @@ class ConfigureDialog extends Component {
             <StepLabel>Locate game installations</StepLabel>
             <StepContent>
               <div>
-                <h5>Games installations:</h5>
+                <h5>Installations:</h5>
                 <List style={styles.list}>
                   <Divider />
                   { this.renderGameInstallations() }
@@ -259,7 +264,7 @@ class ConfigureDialog extends Component {
 
 function mapStateToProps(state){
   return {
-    games: state.gamesList,
+    games: state.installationsList,
     gamesMeta: state.gamesMeta,
     newFormState: state.configNewInstallationForm,
     stepperState: state.configStepperState,
