@@ -1,4 +1,4 @@
-import { REQUEST_UPDATE_INIT_SETTINGS, RECEIVE_UPDATE_INIT_SETTINGS } from '../actions/initializers';
+import { REQUEST_UPDATE_INIT_SETTINGS, RECEIVE_UPDATE_INIT_SETTINGS } from '../actions/initSettings';
 
 let initialState = {
   isSetting: false,
@@ -7,7 +7,7 @@ let initialState = {
   }
 };
 
-let initializer = (state = initialState, action) => {
+let initSettings = (state = initialState, action) => {
   switch(action.type){
     case REQUEST_UPDATE_INIT_SETTINGS:
         return {
@@ -20,7 +20,8 @@ let initializer = (state = initialState, action) => {
             isSetting: false,
             settings: {
               ...state.settings,
-              firstRun: action.settings.firstRun
+              firstRun: action.settings.firstRun,
+              os: action.settings.os
             }
           };
     default:
@@ -28,4 +29,4 @@ let initializer = (state = initialState, action) => {
   }
 }
 
-export default initializer;
+export default initSettings;

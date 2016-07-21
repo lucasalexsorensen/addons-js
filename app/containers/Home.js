@@ -13,7 +13,7 @@ class Home extends Component {
       }
     };
 
-    if (this.props.initializer.settings.firstRun === true){
+    if (this.props.initSettings.settings.firstRun === true){
       return (
         <div>
           <h3 style={styles.heading}>Welcome to addons.js!</h3>
@@ -30,6 +30,7 @@ class Home extends Component {
         <div>
           <br/>
           <h4 style={styles.heading}>Welcome back!</h4>
+          <h5 style={{textAlign: 'center', fontSize: 18}}>Your OS: <b>{this.props.initSettings.settings.os}</b></h5>
 
           <h5 style={{marginLeft: 60, fontWeight: 600, fontSize: 20}}>Changelog:</h5>
           <div style={{marginLeft: 30, display: 'flex', width: '60%', height: '100%', border: '1px solid #dedede'}}>
@@ -68,7 +69,7 @@ class Home extends Component {
 
 function mapStateToProps(state){
   return {
-    initializer: state.initializer
+    initSettings: state.initSettings
   };
 }
 

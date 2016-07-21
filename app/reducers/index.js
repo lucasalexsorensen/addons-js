@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
 import counter from './counter';
-import initializer from './initializer';
+import initSettings from './initSettings';
 import installationsList from './installationsList';
 import gamesMeta from './gamesMeta';
 import filterGamesText from './filterGamesText' ;
@@ -12,7 +12,7 @@ import dialogs from './dialogs';
 import addonsBrowse from './addonsBrowse';
 
 const rootReducer = combineReducers({
-  initializer,
+  initSettings,
   dialogs,
   configStepperState,
   configNewInstallationForm,

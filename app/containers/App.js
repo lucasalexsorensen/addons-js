@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { updateInitSettings } from '../actions/initializers';
+import { updateInitSettings } from '../actions/initSettings';
 
 import Header from '../components/Header';
 import LeftNav from '../components/LeftNav';
@@ -40,7 +40,7 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     numInstallations: state.installationsList.length,
-    initSettings: state.initializer
+    initSettings: state.initSettings
   };
 }
 
