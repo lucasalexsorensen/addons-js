@@ -13,7 +13,7 @@ let initialState = {
     filter: '',
     isFetching: false,
     items: [],
-    categorized: []
+    categorized: {}
   }
 };
 
@@ -74,7 +74,7 @@ let addonsBrowse = (state = initialState, action) => {
           ...state.all,
           isFetching: false,
           items: action.items.sort((a, b) => {
-            a.UIDownloadTotal - b.UIDownloadTotal;
+            return b.UIDownloadTotal - a.UIDownloadTotal;
           }),
           categorized: _.groupBy(action.items, (obj) => { return obj.UICATID; }),
           lastUpdated: action.receivedAt

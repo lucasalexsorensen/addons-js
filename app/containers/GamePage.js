@@ -19,7 +19,7 @@ class GamePage extends Component {
         width: 30,
         height: 30,
         position: 'fixed',
-        marginTop: 20,
+        marginTop: 10,
         marginLeft: 20,
         cursor: 'pointer',
         zIndex: 999
@@ -61,6 +61,7 @@ class GamePage extends Component {
           </nav>
         </div>
 
+
         {this.props.children}
 
       </div>
@@ -80,7 +81,6 @@ function mapStateToProps(state, routerProps) {
       break;
     }
   }
-
   return {
     game: currGame,
     gamesMeta: state.gamesMeta

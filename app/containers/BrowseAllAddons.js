@@ -28,7 +28,7 @@ class BrowseAllAddons extends Component {
 
         <h5 style={{ textAlign: 'center', marginTop: 5 }}>All Addons</h5>
 
-        <div style={{ marginTop: '9%', position: 'fixed', width: '80vw', textAlign: 'center', display: (this.props.addonsBrowse.all.isFetching) ? 'block' : 'none' }} >
+        <div style={{ marginTop: '9%', position: 'fixed', width: '0%', textAlign: 'center', display: (this.props.addonsBrowse.all.isFetching) ? 'block' : 'none' }} >
           <div className="preloader-wrapper active">
             <div className="spinner-layer spinner-blue-only">
               <div className="circle-clipper left">
