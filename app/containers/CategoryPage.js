@@ -63,7 +63,7 @@ class CategoryPage extends Component {
           style={{ display: 'block', marginRight: 'auto', marginLeft: 'auto' }}
         />
 
-        <Table height={'45vh'} fixedHeader>
+        <Table height={'45vh'} fixedHeader={true}>
           <TableHeader style={{ backgroundColor: 'rgb(0, 188, 212)' }} displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
               <TableHeaderColumn style={styles.headerColumn}><b>Name</b></TableHeaderColumn>
@@ -72,7 +72,7 @@ class CategoryPage extends Component {
               <TableHeaderColumn style={styles.headerColumn}><b>Downloads</b></TableHeaderColumn>
             </TableRow>
           </TableHeader>
-          <TableBody displayRowCheckbox={false} showRowHover>
+          <TableBody displayRowCheckbox={false} showRowHover={true}>
             {this.props.addonsBrowse.all.categorized[this.props.category.UICATID].map((addon) => {
               return (
                 <TableRow key={addon.UID} style={{ display: (addon.UIName.toLowerCase().indexOf(this.props.addonsBrowse.categories.pageFilter) !== -1) ? 'table-row' : 'none' }}>

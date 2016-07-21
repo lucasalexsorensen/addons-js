@@ -3,7 +3,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { updateAllFilter } from '../actions/addonsBrowse';
+
 import { FlatButton, TextField, Table, TableHeader, TableBody, TableRow, TableHeaderColumn, TableRowColumn } from 'material-ui';
+import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
+
 
 class BrowseAllAddons extends Component {
   render() {
@@ -24,6 +28,23 @@ class BrowseAllAddons extends Component {
 
         <h5 style={{ textAlign: 'center', marginTop: 5 }}>All Addons</h5>
 
+        <div style={{ marginTop: '9%', position: 'fixed', width: '80vw', textAlign: 'center', display: (this.props.addonsBrowse.all.isFetching) ? 'block' : 'none' }} >
+          <div className="preloader-wrapper active">
+            <div className="spinner-layer spinner-blue-only">
+              <div className="circle-clipper left">
+                <div className="circle"></div>
+              </div>
+              <div className="gap-patch">
+                <div className="circle"></div>
+              </div>
+              <div className="circle-clipper right">
+                <div className="circle"></div>
+              </div>
+            </div>
+          </div>
+          <p>Fetching from MMOUI...</p>
+        </div>
+
         <Table height={'45vh'} fixedHeader>
           <TableHeader style={{ backgroundColor: 'rgb(0, 188, 212)' }} displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
@@ -34,7 +55,7 @@ class BrowseAllAddons extends Component {
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false} showRowHover>
-            {this.props.addonsBrowse.all.items.map((addon) => {
+            {this.props.addonsBrowse.all.items.slice(0, 20).map((addon) => {
               return (
                 <TableRow key={addon.UID} selectable={false} >
                   <TableRowColumn>{addon.UIName}</TableRowColumn>
@@ -68,7 +89,7 @@ function mapStatetoProps(state, routerProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ updateAllFilter }, dispatch);
+  return bindActionCreators({ updateAllFilter: updateAllFilter }, dispatch);
 }
 
 export default connect(mapStatetoProps, mapDispatchToProps)(BrowseAllAddons);

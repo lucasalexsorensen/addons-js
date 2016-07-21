@@ -46,7 +46,6 @@ class ConfigureDialog extends Component {
       removeButton: {
         borderRadius: 2,
         // width: 30,
-        backgroundColor: '#ef5350',
         float: 'right',
         cursor: 'pointer'
       }
@@ -66,9 +65,8 @@ class ConfigureDialog extends Component {
           <div key={index} style={styles.container}>
             <Divider />
             <ListItem disabled leftAvatar={<Avatar style={{ background: 'none' }}src={'assets/img/' + this.props.gamesMeta[game.gameId].imageUrl} />}>
-              <IconButton onClick={() => this.props.removeGame(index)} style={styles.removeButton} iconStyle={styles.removeIcon}>
-                <NavigationClose color="white" />
-              </IconButton>
+              <RaisedButton labelStyle={{color: 'white'}} backgroundColor='#ef5350' style={styles.removeButton} onClick={() => this.props.removeGame(index)} label="remove" icon={<NavigationClose color="white" />} />
+
               {this.props.gamesMeta[game.gameId].name}
               <br />
               <br />

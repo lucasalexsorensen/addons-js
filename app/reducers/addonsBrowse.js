@@ -49,7 +49,6 @@ let addonsBrowse = (state = initialState, action) => {
           filter: action.text
         }
       };
-
     case UPDATE_CATEGORY_PAGE_FILTER:
       return {
         ...state,
@@ -74,7 +73,9 @@ let addonsBrowse = (state = initialState, action) => {
         all: {
           ...state.all,
           isFetching: false,
-          items: action.items,
+          items: action.items.sort((a, b) => {
+            a.UIDownloadTotal - b.UIDownloadTotal;
+          }),
           categorized: _.groupBy(action.items, (obj) => { return obj.UICATID; }),
           lastUpdated: action.receivedAt
         }

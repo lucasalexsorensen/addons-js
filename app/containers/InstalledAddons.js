@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import { updateFilter } from '../actions/filterInstalledAddons';
 
-import { AutoComplete, IconButton, Table, TableHeader, TableHeaderColumn, TableBody, TableRow, TableRowColumn } from 'material-ui';
+import { TextField, IconButton, Table, TableHeader, TableHeaderColumn, TableBody, TableRow, TableRowColumn } from 'material-ui';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 class InstalledAddons extends Component {
@@ -15,8 +15,8 @@ class InstalledAddons extends Component {
     });
   }
 
-  handleUpdateInput(text) {
-    this.props.updateFilter(text);
+  handleUpdateInput(event) {
+    this.props.updateFilter(event.target.value);
   }
 
   filterSearchOptions(searchText, key) {
@@ -33,18 +33,15 @@ class InstalledAddons extends Component {
 
     return (
       <div>
-        <AutoComplete
-          onNewRequest={this.handleUpdateInput.bind(this)}
-          onUpdateInput={this.handleUpdateInput.bind(this)}
-          searchText={this.props.filterText}
+        <TextField
+          onChange={this.handleUpdateInput.bind(this)}
+          value={this.props.filterText}
           hintText="Search names"
-          dataSource={this.getSearchOptions()}
-          underlineShow={false}
-          filter={this.filterSearchOptions}
+          underlineShow={true}
           style={styles.searchField}
         />
-        <Table multiSelectable fixedHeader>
-          <TableHeader adjustForCheckBox>
+        <Table multiSelectable={false} fixedHeader={true}>
+          <TableHeader adjustForCheckBox={false} displaySelectAll={false}>
             <TableRow>
               <TableHeaderColumn>Name</TableHeaderColumn>
               <TableHeaderColumn>Status</TableHeaderColumn>
@@ -52,10 +49,10 @@ class InstalledAddons extends Component {
               <TableHeaderColumn>Downloads</TableHeaderColumn>
             </TableRow>
           </TableHeader>
-          <TableBody showRowHover>
+          <TableBody displayRowCheckbox={false} showRowHover={true}>
             {this.props.game.installedAddons.map((addon) => {
               return (
-                <TableRow key={addon.id} style={{ display: (addon.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1) ? 'table-row' : 'none' }}>
+                <TableRow selectable={false} key={addon.id} style={{ display: (addon.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1) ? 'table-row' : 'none' }}>
                   <TableRowColumn>{addon.name}</TableRowColumn>
                   <TableRowColumn>{addon.status}</TableRowColumn>
                   <TableRowColumn>{addon.latestVersion}</TableRowColumn>
