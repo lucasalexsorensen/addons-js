@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { updateInitSettings } from '../actions/initSettings';
+import { updatePaths } from '../actions/pathScanner'
 
 import Header from '../components/Header';
 import LeftNav from '../components/LeftNav';
@@ -13,6 +14,10 @@ class App extends Component {
   componentWillMount(){
     if (!this.props.initSettings.isSetting){
       this.props.updateInitSettings();
+    }
+
+    if (!this.props.pathScanner.isScanning){
+      this.props.updatePaths();
     }
   }
 
@@ -40,12 +45,13 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     numInstallations: state.installationsList.length,
-    initSettings: state.initSettings
+    initSettings: state.initSettings,
+    pathScanner: state.pathScanner
   };
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({updateInitSettings: updateInitSettings}, dispatch);
+  return bindActionCreators({updateInitSettings: updateInitSettings, updatePaths: updatePaths}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

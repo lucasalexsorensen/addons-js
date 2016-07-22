@@ -28,6 +28,11 @@ class InstalledAddons extends Component {
       searchField: {
         marginLeft: 25,
         width: '50%'
+      },
+
+      headerColumn: {
+        color: 'white',
+        borderRadius: 0
       }
     };
 
@@ -41,12 +46,12 @@ class InstalledAddons extends Component {
           style={styles.searchField}
         />
         <Table multiSelectable={false} fixedHeader={true}>
-          <TableHeader adjustForCheckBox={false} displaySelectAll={false}>
+          <TableHeader style={{backgroundColor: 'rgb(0, 188, 212)'}} adjustForCheckBox={false} displaySelectAll={false}>
             <TableRow>
-              <TableHeaderColumn>Name</TableHeaderColumn>
-              <TableHeaderColumn>Status</TableHeaderColumn>
-              <TableHeaderColumn>Latest Version</TableHeaderColumn>
-              <TableHeaderColumn>Downloads</TableHeaderColumn>
+              <TableHeaderColumn style={styles.headerColumn}>Name</TableHeaderColumn>
+              <TableHeaderColumn style={styles.headerColumn}>Status</TableHeaderColumn>
+              <TableHeaderColumn style={styles.headerColumn}>Latest Version</TableHeaderColumn>
+              <TableHeaderColumn style={styles.headerColumn}>Downloads</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false} showRowHover={true}>

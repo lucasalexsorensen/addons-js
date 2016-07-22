@@ -61,6 +61,11 @@ class Home extends Component {
   render() {
     return (
       <div>
+        {this.props.pathScanner.paths.map((path) => {
+          return (
+            <p>{path}</p>
+          );
+        })}
         {this.renderMessage()}
       </div>
     );
@@ -69,7 +74,8 @@ class Home extends Component {
 
 function mapStateToProps(state){
   return {
-    initSettings: state.initSettings
+    initSettings: state.initSettings,
+    pathScanner: state.pathScanner
   };
 }
 

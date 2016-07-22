@@ -9,7 +9,7 @@ export function requestUpdateInitSettings(){
   }
 }
 
-export function receiveUpdateInitSettings(settings = {firstRun: true, os: undefined}){
+export function receiveUpdateInitSettings(settings = {firstRun: true, os: "UNKNOWN"}){
   return {
     type: RECEIVE_UPDATE_INIT_SETTINGS,
     settings
